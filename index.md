@@ -9,12 +9,13 @@ title: "About Me"
 
 I am a PhD student in Electrical and Computer Engineering at the University of Southern California. I am working in
 [Neural Systems Engineering & Information Processing Lab][NSEIP] under the supervision of
-[Prof. Maryam Shanechi][Maryam_Shanechi]. My research interest lies at the intersection of signal processing, statistical learning and their applications in biomedical areas.
+[Prof. Maryam Shanechi][Maryam_Shanechi]. My research interest lies at the intersection of statistical signal processing, control theory and their applications in closed-loop brain machine interfaces.
 
 In 2019, I received my B.S. in Electrical and Electronics Engineering at Bilkent University, Turkey. In 2018, I worked as
-a Research Assistant in the Brain Computer Interface (BCI) laboratory of A*STAR, Singapore. During my internship, I studied detection of epileptic seizures based on EEG data by using both traditional machine learning and deep learning approaches.
+a Research Assistant in the Brain Computer Interface (BCI) laboratory of [A*STAR][A_STAR], Singapore. During my internship, I studied detection of epileptic seizures based on EEG data by using both traditional machine learning and deep learning approaches.
 
 
 
 [NSEIP]: https://nseip.usc.edu/
 [Maryam_Shanechi]: https://viterbi.usc.edu/directory/faculty/Shanechi/Maryam
+[A_STAR]: https://www.a-star.edu.sg/
