@@ -108,7 +108,7 @@ analytics:
 # Site Author
 author:
   name             : "Mustafa Talha Avcu"
-  avatar           : "/assets/images/profile_picture2.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/profile_picture.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "I am a Ph.D. student at USC, working on closed-loop brain machine interfaces"
   location         : "Los Angeles"
   email            :
