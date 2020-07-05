@@ -5,4 +5,4 @@ permalink: /resume/
 title: "Resume"
 ---
 
-Click <a href="/assets/files/mustafa_avcu_resume.pdf" download>here</a> to download my resume.
+Click <a href="/assets/files/mustafa_avcu_resume.pdf">here</a> to see my resume.
