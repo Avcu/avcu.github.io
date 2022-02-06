@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://avcu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://avcu.github.io/" rel="alternate" type="text/html" /><updated>2022-01-22T02:03:07-06:00</updated><id>https://avcu.github.io/feed.xml</id><title type="html">Mustafa Talha Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Talha Avcu</name></author><entry><title type="html">Building GitHub Pages using Docker</title><link href="https://avcu.github.io/programming/building-github-pages-using-docker/" rel="alternate" type="text/html" title="Building GitHub Pages using Docker" /><published>2022-01-21T00:00:00-06:00</published><updated>2022-01-21T00:00:00-06:00</updated><id>https://avcu.github.io/programming/building-github-pages-using-docker</id><content type="html" xml:base="https://avcu.github.io/programming/building-github-pages-using-docker/"><![CDATA[<p>This website is built using Jekyll with Minimal Mistakes theme and hosted on
+GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll.
+Ruby is a Programming language, RubyGems is a package manager for Ruby just like
+pip for Python and finally Jekyll is a gem that converts markdowns to html codes. 
+Here, we will see how we can use docker to handle all these in an easy and clear
+way.</p>
+
+<h2 id="step-1-create-a-container-with-ruby">Step 1: Create a container with Ruby</h2>
+
+<p>Once a Github Page Theme is forked and cloned locally, we need to create a
+container with Ruby. Create a file called <code class="language-plaintext highlighter-rouge">Dockerfile</code> with the following content</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ruby:2.5
+
+WORKDIR /usr/src/app
+
+# we put README.md as placeholder, because Docker cannot create empty container
+COPY README.md ./
+
+#create volume for later mounting of your local directory
+VOLUME /usr/src/app
+</code></pre></div></div>
+<p>And then, build the container</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t my-ruby-env .
+</code></pre></div></div>
+
+<h2 id="step-2-generate-gemfilelock">Step 2: Generate Gemfile.lock</h2>
+
+<p>Generate a <code class="language-plaintext highlighter-rouge">Gemfile.lock</code> for minimal-mistakes theme</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --volume="$PWD:/usr/src/app" -it my-ruby-env bundle install
+</code></pre></div></div>
+
+<h2 id="step-3-create-a-container-for-the-website-to-run-locally">Step 3: Create a container for the website to run locally</h2>
+
+<p>Make sure that <code class="language-plaintext highlighter-rouge">port</code> and <code class="language-plaintext highlighter-rouge">host</code> are defined in the <code class="language-plaintext highlighter-rouge">_config.yml</code>. Modify the
+<code class="language-plaintext highlighter-rouge">Dockerfile</code> as follows</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ruby:2.5
+
+RUN bundle config --global frozen 1
+
+WORKDIR /usr/src/app
+
+# prepare to install ruby packages into container
+COPY Gemfile Gemfile.lock minimal-mistakes-jekyll.gemspec ./
+
+RUN bundle install
+
+VOLUME /usr/src/app
+
+EXPOSE 4000
+
+CMD ["jekyll", "serve"]
+</code></pre></div></div>
+
+<p>Finally, run the following commands to build the container and run it.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t minimal-mistakes .
+docker run --volume="$PWD:/usr/src/app" -p 4000:4000 -t minimal-mistakes
+</code></pre></div></div>
+
+<h2 id="step-4-publish-it-on-github">Step 4: Publish it on GitHub</h2>
+
+<p>Now, we can build the site in production mode and upload the <code class="language-plaintext highlighter-rouge">_site</code> to Github.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --rm -it --volume="$PWD:/srv/jekyll" --volume="$PWD:/usr/src/app" --env JEKYLL_ENV=production jekyll/jekyll:3.8 jekyll build
+</code></pre></div></div>]]></content><author><name>Mustafa Talha Avcu</name></author><category term="Programming" /><category term="Github" /><category term="Docker" /><summary type="html"><![CDATA[This website is built using Jekyll with Minimal Mistakes theme and hosted on GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll. Ruby is a Programming language, RubyGems is a package manager for Ruby just like pip for Python and finally Jekyll is a gem that converts markdowns to html codes. Here, we will see how we can use docker to handle all these in an easy and clear way.]]></summary></entry><entry><title type="html">Writing on Github</title><link href="https://avcu.github.io/programming/writing-on-github/" rel="alternate" type="text/html" title="Writing on Github" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>https://avcu.github.io/programming/writing-on-github</id><content type="html" xml:base="https://avcu.github.io/programming/writing-on-github/"><![CDATA[<p>It’s a template post presenting different writing styles/features that can be used in github repositories and pages.
+Most of the examples are from <a href="https://help.github.com/en/articles/basic-writing-and-formatting-syntax">Github - Basic Writing and Formatting Syntax</a></p>
+
+<h1 id="headings">Headings</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## The second largest heading
+###### The smallest heading
+</code></pre></div></div>
+
+<h2 id="the-second-largest-heading">The second largest heading</h2>
+<h6 id="the-smallest-heading">The smallest heading</h6>
+
+<h1 id="styling-text">Styling Text</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Bold**
+*Italic*
+~~Strikethrough~~
+</code></pre></div></div>
+
+<p><strong>Bold</strong>
+<em>Italic</em>
+<del>Strikethrough</del></p>
+
+<h1 id="quoting-code">Quoting Code</h1>
+<p>The text within the backticks will not be formatted.</p>
+
+<p>Use <code class="language-plaintext highlighter-rouge">git status</code> to list all new or modified files that haven’t yet been committed.</p>
+
+<p>To format code or text into its own distinct block, use triple backticks.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
+git add
+git commit
+</code></pre></div></div>
+
+<p>Let’s put a python code here.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Current time is:"</span><span class="p">,</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">())</span>
+</code></pre></div></div>
+<p>Let’s also show the output of the code above.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Current time is: 2019-07-03 16:05:48.051145
+</code></pre></div></div>
+
+<h1 id="lists">Lists</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- George Washington
+- John Adams
+- Thomas Jefferson
+</code></pre></div></div>
+
+<ul>
+  <li>George Washington</li>
+  <li>John Adams</li>
+  <li>Thomas Jefferson</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. George Washington
+2. John Adams
+3. Thomas Jefferson
+</code></pre></div></div>
+
+<ol>
+  <li>George Washington</li>
+  <li>John Adams</li>
+  <li>Thomas Jefferson</li>
+</ol>
+
+<h1 id="nested-lists">Nested Lists</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. First list item
+   - First nested list item
+     - Second nested list item
+</code></pre></div></div>
+
+<ol>
+  <li>First list item
+    <ul>
+      <li>First nested list item
+        <ul>
+          <li>Second nested list item</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h1 id="task-lists">Task Lists</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- [x] Finish my changes
+- [ ] Push my commits to GitHub
+- [ ] Open a pull request
+</code></pre></div></div>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Finish my changes</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Push my commits to GitHub</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Open a pull request</li>
+</ul>
+
+<h1 id="emoji">Emoji</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:+1: :smile: :punch: :satisfied: :clap:
+</code></pre></div></div>
+
+<p>:+1: :smile: :punch: :satisfied: :clap:</p>
+
+<h1 id="ignoring-markdown-formatting">Ignoring Markdown Formatting</h1>
+
+<p>You can tell GitHub to ignore (or escape) Markdown formatting by using \ before the Markdown character.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Let's rename \*our-new-project\* to \*our-old-project\*.
+</code></pre></div></div>
+
+<p>Let’s rename *our-new-project* to *our-old-project*.</p>]]></content><author><name>Mustafa Talha Avcu</name></author><category term="Programming" /><category term="Github" /><category term="ReadMe" /><summary type="html"><![CDATA[It’s a template post presenting different writing styles/features that can be used in github repositories and pages. Most of the examples are from Github - Basic Writing and Formatting Syntax]]></summary></entry></feed>

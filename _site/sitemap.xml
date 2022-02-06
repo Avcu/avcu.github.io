@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://avcu.github.io/programming/writing-on-github/</loc>
+<lastmod>2019-07-01T00:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://avcu.github.io/programming/building-github-pages-using-docker/</loc>
+<lastmod>2022-01-21T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://avcu.github.io/blog/</loc>
+</url>
+<url>
+<loc>https://avcu.github.io/</loc>
+</url>
+<url>
+<loc>https://avcu.github.io/publications/</loc>
+</url>
+<url>
+<loc>https://avcu.github.io/resume/</loc>
+</url>
+<url>
+<loc>https://avcu.github.io/assets/files/avcu_resume.pdf</loc>
+<lastmod>2021-12-28T13:18:42-06:00</lastmod>
+</url>
+</urlset>
