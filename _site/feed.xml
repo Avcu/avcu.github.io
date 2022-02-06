@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://avcu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://avcu.github.io/" rel="alternate" type="text/html" /><updated>2022-01-22T02:03:07-06:00</updated><id>https://avcu.github.io/feed.xml</id><title type="html">Mustafa Talha Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Talha Avcu</name></author><entry><title type="html">Building GitHub Pages using Docker</title><link href="https://avcu.github.io/programming/building-github-pages-using-docker/" rel="alternate" type="text/html" title="Building GitHub Pages using Docker" /><published>2022-01-21T00:00:00-06:00</published><updated>2022-01-21T00:00:00-06:00</updated><id>https://avcu.github.io/programming/building-github-pages-using-docker</id><content type="html" xml:base="https://avcu.github.io/programming/building-github-pages-using-docker/"><![CDATA[<p>This website is built using Jekyll with Minimal Mistakes theme and hosted on
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://avcu.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://avcu.github.io/" rel="alternate" type="text/html" /><updated>2022-02-06T02:45:50-06:00</updated><id>https://avcu.github.io/feed.xml</id><title type="html">Mustafa Talha Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Talha Avcu</name></author><entry><title type="html">Building GitHub Pages using Docker</title><link href="https://avcu.github.io/programming/building-github-pages-using-docker/" rel="alternate" type="text/html" title="Building GitHub Pages using Docker" /><published>2022-01-21T00:00:00-06:00</published><updated>2022-01-21T00:00:00-06:00</updated><id>https://avcu.github.io/programming/building-github-pages-using-docker</id><content type="html" xml:base="https://avcu.github.io/programming/building-github-pages-using-docker/"><![CDATA[<p>This website is built using Jekyll with Minimal Mistakes theme and hosted on
 GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll.
-Ruby is a Programming language, RubyGems is a package manager for Ruby just like
+Ruby is a programming language, RubyGems is a package manager for Ruby just like
 pip for Python and finally Jekyll is a gem that converts markdowns to html codes. 
 Here, we will see how we can use docker to handle all these in an easy and clear
 way.</p>
@@ -20,7 +20,7 @@ COPY README.md ./
 #create volume for later mounting of your local directory
 VOLUME /usr/src/app
 </code></pre></div></div>
-<p>And then, build the container</p>
+<p>And then, build a container</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t my-ruby-env .
 </code></pre></div></div>
@@ -34,7 +34,7 @@ VOLUME /usr/src/app
 
 <h2 id="step-3-create-a-container-for-the-website-to-run-locally">Step 3: Create a container for the website to run locally</h2>
 
-<p>Make sure that <code class="language-plaintext highlighter-rouge">port</code> and <code class="language-plaintext highlighter-rouge">host</code> are defined in the <code class="language-plaintext highlighter-rouge">_config.yml</code>. Modify the
+<p>Make sure that <code class="language-plaintext highlighter-rouge">port</code> and <code class="language-plaintext highlighter-rouge">host</code> are defined in the <code class="language-plaintext highlighter-rouge">_config.yml</code>, and modify the
 <code class="language-plaintext highlighter-rouge">Dockerfile</code> as follows</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ruby:2.5
@@ -65,7 +65,7 @@ docker run --volume="$PWD:/usr/src/app" -p 4000:4000 -t minimal-mistakes
 
 <p>Now, we can build the site in production mode and upload the <code class="language-plaintext highlighter-rouge">_site</code> to Github.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --rm -it --volume="$PWD:/srv/jekyll" --volume="$PWD:/usr/src/app" --env JEKYLL_ENV=production jekyll/jekyll:3.8 jekyll build
-</code></pre></div></div>]]></content><author><name>Mustafa Talha Avcu</name></author><category term="Programming" /><category term="Github" /><category term="Docker" /><summary type="html"><![CDATA[This website is built using Jekyll with Minimal Mistakes theme and hosted on GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll. Ruby is a Programming language, RubyGems is a package manager for Ruby just like pip for Python and finally Jekyll is a gem that converts markdowns to html codes. Here, we will see how we can use docker to handle all these in an easy and clear way.]]></summary></entry><entry><title type="html">Writing on Github</title><link href="https://avcu.github.io/programming/writing-on-github/" rel="alternate" type="text/html" title="Writing on Github" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>https://avcu.github.io/programming/writing-on-github</id><content type="html" xml:base="https://avcu.github.io/programming/writing-on-github/"><![CDATA[<p>It’s a template post presenting different writing styles/features that can be used in github repositories and pages.
+</code></pre></div></div>]]></content><author><name>Mustafa Talha Avcu</name></author><category term="Programming" /><category term="Github" /><category term="Docker" /><summary type="html"><![CDATA[This website is built using Jekyll with Minimal Mistakes theme and hosted on GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll. Ruby is a programming language, RubyGems is a package manager for Ruby just like pip for Python and finally Jekyll is a gem that converts markdowns to html codes. Here, we will see how we can use docker to handle all these in an easy and clear way.]]></summary></entry><entry><title type="html">Writing on Github</title><link href="https://avcu.github.io/programming/writing-on-github/" rel="alternate" type="text/html" title="Writing on Github" /><published>2019-07-01T00:00:00-05:00</published><updated>2019-07-01T00:00:00-05:00</updated><id>https://avcu.github.io/programming/writing-on-github</id><content type="html" xml:base="https://avcu.github.io/programming/writing-on-github/"><![CDATA[<p>It’s a template post presenting different writing styles/features that can be used in github repositories and pages.
 Most of the examples are from <a href="https://help.github.com/en/articles/basic-writing-and-formatting-syntax">Github - Basic Writing and Formatting Syntax</a></p>
 
 <h1 id="headings">Headings</h1>
