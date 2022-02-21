@@ -1,0 +1,55 @@
+* {
+	margin:0;
+	padding:0;
+	border:0;
+}
+.wrapper {
+  width: 1410px;
+  background-color: #21252a;
+  float: left;
+  margin: auto;
+  border: 5px solid #73AD21;
+}
+
+.navigation {
+  width: 1400px;
+  margin: auto;
+  text-align: center;
+  border: 3px solid #A31227;
+}
+.navigation li {
+  display: inline-block;
+  font-size: 28px;
+  padding: 20px;
+}
+.navigation li a {
+  color: #FFFFFF;
+}
+
+.banner_image {
+  position: relative;
+  background-image: url("imgs/rodeo-drive.jpg");
+  background-size: cover;
+  background-position: top 1400px left 0px;
+  height: 400px;
+  width: 1400px;
+}
+
+.banner_text {
+  position: absolute;
+  font-size: 36px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FFA500;
+}
+
+.flex_container {
+  display: flex;
+}
+
+.flex_element {
+  flex:1;
+  border: 2px solid red;
+  margin-right: 20px;
+}
