@@ -6,16 +6,6 @@ const response = await fetch(DATA);
 
 // let gd = await response.text(); // also try .json()
 let gd = await response.json();
-
-//prtt(gd);
-console.log(gd);
-
-console.log(typeof gd);
-console.log(Object.keys(gd));
-console.log(gd.section2);
-// return gd;
-
-console.log('Starting here');
 render(gd);
 }// fetchData()
 
@@ -26,22 +16,28 @@ function render(content){
   for (const element of section2Content){
 
     let newSubDiv = document.createElement('div');
-    newSubDiv.classList.add('flex_element');
+    newSubDiv.classList.add('section2_flex_element');
 
     let subDivIm = document.createElement('img');
     subDivIm.src = 'imgs/' + element.image;
-    subDivIm.style.cssText = 'width:auto; height:250px; display: block; margin-left: auto; margin-right: auto';
+    subDivIm.classList.add('section2_image_style');
 
-    let subDivHeading = document.createElement('h2');
+    let subDivHeading = document.createElement('p');
+    subDivHeading.classList.add('heading')
     subDivHeading.innerText = element.heading;
-    subDivHeading.style.cssText = 'color:#FFFFFF';
+
+    let subDivSpaceOne = document.createElement('br');
+    let subDivSpaceTwo = document.createElement('br');
+    let subDivSpaceThree = document.createElement('br');
 
     let subDivText = document.createElement('p');
     subDivText.innerText = element.text;
-    subDivText.style.cssText = 'color:#FFFFFF';
 
+    newSubDiv.appendChild(subDivSpaceOne);
     newSubDiv.appendChild(subDivIm);
+    newSubDiv.appendChild(subDivSpaceTwo);
     newSubDiv.appendChild(subDivHeading);
+    newSubDiv.appendChild(subDivSpaceThree);
     newSubDiv.appendChild(subDivText);
 
     div2.appendChild(newSubDiv);
@@ -50,17 +46,23 @@ function render(content){
   let section3Content = content.section3;
   const div3Text = document.getElementById("section3_text");
 
+  let subDivSpaceOne = document.createElement('br');
+  let subDivSpaceTwo = document.createElement('br');
+
   let divText = document.createElement('p');
   divText.innerText = section3Content.text;
-  divText.style.cssText = 'color:#FFFFFF; font-size: 18px;';
+  divText.classList.add('section3_text_style')
+  divText.classList.add('default_text')
 
+  div3Text.appendChild(subDivSpaceOne);
+  div3Text.appendChild(subDivSpaceTwo);
   div3Text.appendChild(divText);
 
   const div3Im = document.getElementById("section3_im");
 
   let subDivIm = document.createElement('img');
   subDivIm.src = 'imgs/' + 'lasky.png';
-  subDivIm.style.cssText = 'width:auto; height:400px; display: block; margin-left: auto; margin-right: auto';
+  subDivIm.classList.add('section3_image_style');
 
   div3Im.appendChild(subDivIm);
 
@@ -74,17 +76,20 @@ function render(content){
 
     // Text
     let subDivOne = document.createElement('div');
-    subDivOne.classList.add('flex_element');
+    subDivOne.classList.add('flex_element_two_column');
 
     let subDivHeading = document.createElement('p');
+    subDivHeading.classList.add('heading')
     subDivHeading.innerText = element.heading;
-    subDivHeading.style.cssText = 'color:#FFFFFF; font-size: 18px;';
+
+    let subDivSpace = document.createElement('br');
 
     let subDivText = document.createElement('p');
+    subDivText.classList.add('default_text')
     subDivText.innerText = element.text;
-    subDivText.style.cssText = 'color:#FFFFFF; font-size: 18px;';
 
     subDivOne.appendChild(subDivHeading)
+    subDivOne.appendChild(subDivSpace)
     subDivOne.appendChild(subDivText)
 
     // Image
@@ -93,18 +98,21 @@ function render(content){
 
     let subDivIm = document.createElement('img');
     subDivIm.src = 'imgs/' + element.image;
-    subDivIm.style.cssText = 'width:auto; height:300px; display: block; margin-left: auto; margin-right: auto';
+    subDivIm.classList.add('section4_image_style');
 
     newSubDivTwo.appendChild(subDivIm)
 
     // Merge
     if (idx == 0){
-      newDiv.appendChild(newSubDivTwo)
-      newDiv.appendChild(subDivOne)
+      // start with image and put the text to the left
+      subDivOne.style.cssText = 'text-align:left;';
+      newDiv.appendChild(newSubDivTwo);
+      newDiv.appendChild(subDivOne);
       idx++
     } else {
-      newDiv.appendChild(subDivOne)
-      newDiv.appendChild(newSubDivTwo)
+      subDivOne.style.cssText = 'text-align: right;';
+      newDiv.appendChild(subDivOne);
+      newDiv.appendChild(newSubDivTwo);
     }
 
     div4.appendChild(newDiv)
