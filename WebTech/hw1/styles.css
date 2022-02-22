@@ -27,7 +27,10 @@
 }
 .navigation a {
 	text-decoration:none;
-	text-shadow: 2px 2px #FFA500;
+	text-shadow: 1px 1px #FFA500;
+}
+.navigation a:hover {
+	color: #FFA500;
 }
 
 .banner_image {
