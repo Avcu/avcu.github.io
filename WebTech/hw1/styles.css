@@ -6,7 +6,7 @@
 	font-family: "Montserrat";
 }
 .wrapper {
-  width: 1400px;
+  width: 1440px;
   background-color: #21252a;
   float: left;
   margin: auto;
@@ -14,7 +14,7 @@
 }
 
 .navigation {
-  width: 1400px;
+  width: 1440px;
   margin: auto;
   text-align: center;
   /*border: 3px solid #A31227;*/
@@ -36,7 +36,7 @@
   background-size: cover;
   background-position: top 1400px left 0px;
   height: 400px;
-  width: 1400px;
+  width: 1440px;
 }
 
 .error_image {
@@ -45,7 +45,7 @@
 	background-size: cover;
 	background-position: top 600px left 0px;
 	height: 400px;
-	width: 1400px;
+	width: 1440px;
 }
 
 .error_layer {

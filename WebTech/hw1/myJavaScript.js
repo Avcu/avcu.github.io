@@ -29,6 +29,7 @@ function render(content){
     let subDivSpaceOne = document.createElement('br');
     let subDivSpaceTwo = document.createElement('br');
     let subDivSpaceThree = document.createElement('br');
+    let subDivSpaceFour = document.createElement('br');
 
     let subDivText = document.createElement('p');
     subDivText.innerText = element.text;
@@ -39,6 +40,7 @@ function render(content){
     newSubDiv.appendChild(subDivHeading);
     newSubDiv.appendChild(subDivSpaceThree);
     newSubDiv.appendChild(subDivText);
+    newSubDiv.appendChild(subDivSpaceFour);
 
     div2.appendChild(newSubDiv);
   }
