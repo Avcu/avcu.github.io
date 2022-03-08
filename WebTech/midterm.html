@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="" style="max-width: 800px">
+      <div id="sample_one" style="border-style:solid">
+       <h1> Heading <h1>
+       <p style="color:blue"> hehe </p>
+      </div>
+
+      <hr>
+      <div id="sample_two" style="border-style:solid">
+        <h2> Subheading1 </h2>
+        <h2> Subheading2 </h2>
+        <h2> Subheading3 </h2>
+      </div>
+
+      <hr>
+      <div id="sample_three" style="border-style:solid">
+          Number of clicks = 0
+      </div>
+      <INPUT TYPE="button" VALUE="Increment Counter" onclick="updateMessage()">
+
+      <hr>
+      <div style="border-style:solid">
+        <INPUT id="movable_button" style="position:relative; left=0px" TYPE="button" VALUE="move button" onclick="handleClick()">
+      </div>
+
+       <hr>
+      <div id="sample_four" style="border-style:solid">
+        <h3> Subheading1 </h3>
+        <h3> Subheading2 </h3>
+        <h3> Subheading3 </h3>
+        <h3> Subheading4 </h3>
+        <h3> Subheading5 </h3>
+      </div>
+      <INPUT TYPE="button" VALUE="Click to reverse above div" onclick="reverse()">
+
+      <hr>
+      <div id="sample_five" style="border-style:solid">
+        <INPUT id="random_button" style="position:relative" TYPE="button" VALUE="Do not TOUCH" onclick="randomMove()">
+      </div>
+    </div>
+
+
+     <script>
+     document.getElementById("sample_one").style.color = "red";
+
+      /*document.getElementById("sample_two").innerHTML += "<h2 style='color:green'> Text is overwritten </h2>";*/
+
+     const myElement = document.getElementById("sample_two");
+
+     var newDiv = document.createElement('div');
+     newDiv.innerHTML = "<h2 style='color:green'> Text is overwritten </h2>";
+     myElement.appendChild(newDiv);
+
+     var hits = 0;
+     function updateMessage() {
+      hits += 1;
+        document.getElementById("sample_three").innerHTML = "Number of clicks = " + hits;
+     }
+
+     var my_button = document.getElementById("movable_button");
+     var xlocation = parseInt(my_button.style.left) || 0;
+     var direction = 1; // right
+     function handleClick() {
+        console.log(my_button);
+        console.log(my_button.style.left);
+        console.log(parseInt(my_button.style.left));
+        if (xlocation > 250) {
+        direction = 0;
+        } else if (xlocation <= 0) {
+        direction = 1;
+        } else {
+        }
+
+        if (direction == 1) {
+         xlocation += 50;
+        } else {
+         xlocation -= 50;
+        }
+
+       document.getElementById("movable_button").style.left = xlocation + "px";
+     }
+
+     function reverse() {
+        var n = document.getElementById("sample_four");
+      var kids = n.childNodes;
+        var numKids = kids.length;
+        for (var i = numKids-1; i>=0; i--){
+        var c = n.removeChild(kids[i]);
+          n.appendChild(c);
+        }
+
+     }
+
+     var random_button = document.getElementById("random_button");
+     function randomMove() {
+      	var xCurLoc = parseInt(random_button.style.left) || 0;
+      	var yCurLoc = parseInt(random_button.style.top) || 0;
+       	console.log(xCurLoc)
+       	console.log(yCurLoc)
+
+       	random_x = Math.floor(Math.random()*700);
+        random_y = Math.floor(Math.random()*20);
+        // console.log(random_x)
+       	// console.log(random_y)
+
+      	document.getElementById("random_button").style.left = random_x + "px";
+      	//document.getElementById("random_button").style.top = random_y + "px";
+     }
+     </script>
+
+  </body>
+</html>
