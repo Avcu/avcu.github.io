@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+
+  <body>
+    <div class="intro">
+      <br><br><br><br><br>
+      <div class="intro_text">
+        <h3>I love running and biking, and here you can find the routes that I have run
+          and biked throughout Los Angeles together with the links to the tools used to prepare this page.
+          While I was studying at USC, I got more into both running and biking mainly
+          because of COVID confining us in our small places that we could barely afford.
+          So, I spent more and more time doing both while enjoying the beautiful weather in the Southern California.
+        </h3><br>
+        <h3> <i>Technical details:</i> Preparing this website is two folds. First, I wrote a
+          <a href="https://github.com/Avcu/GPX-data-pipeline">Python script</a>
+          that processes given GPX (this is how fitness/tracking apps store your geospatial data) files, and
+          creates a KML file with all the tracks and a JSON file to store some statistics. Then, the KML file is
+          provided to <a href="https://developers.google.com/maps/documentation/javascript/overview">Maps Javascript API</a>,
+          while we load the JSON file to display the statistics. Feel free to contact me for any suggestions and/or questions.
+        </h3>
+      </div>
+      <br><br>
+    </div>
+    <br>
+
+    <div class="content_run">
+      <br>
+      <h1 style="text-align:center;">Running</h1>
+      <br>
+      <div class="flex-container">
+        <div class="flex-child" id="map_run"></div>
+        <div class="flex-child" id="stat_run">
+
+        </div>
+      </div>
+      <br><br>
+    </div>
+    <br><br><br>
+    <div class="content_bike">
+      <br>
+      <h1 style="text-align:center;">Biking</h1>
+      <br>
+      <div class="flex-container">
+        <div class="flex-child" id="map_bike"></div>
+        <div class="flex-child" id="stat_bike">
+
+        </div>
+      </div>
+      <br><br>
+    </div>
+    <br><br><br>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback.-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzKVlpdkTTyUTqb96A7sXs_EhF6dfC-Ao&callback=initMap&v=weekly" async></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
