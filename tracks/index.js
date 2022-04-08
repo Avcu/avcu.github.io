@@ -8,7 +8,7 @@ function initMap() {
   // The map, centered at Uluru
   const map_run = new google.maps.Map(document.getElementById("map_run"), {
     mapId: "8e0a97af9386fef",
-    zoom: 12,
+    zoom: 13,
     center: myHome,
   });
   // const marker_one = new google.maps.Marker({
