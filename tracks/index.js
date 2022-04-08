@@ -8,7 +8,7 @@ function initMap() {
   // The map, centered at Uluru
   const map_run = new google.maps.Map(document.getElementById("map_run"), {
     mapId: "8e0a97af9386fef",
-    zoom: 13,
+    zoom: 12,
     center: myHome,
   });
   // const marker_one = new google.maps.Marker({
@@ -18,6 +18,7 @@ function initMap() {
   const runKML = new google.maps.KmlLayer({
     url: "https://avcu.github.io/tracks/data/tracks_run.kml",
     map: map_run,
+    preserveViewport: true,
   });
 
   const map_bike = new google.maps.Map(document.getElementById("map_bike"), {
