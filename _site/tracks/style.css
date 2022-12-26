@@ -1,0 +1,82 @@
+* {
+	margin:0;
+	padding:0;
+	border:0;
+	color:#FFFFFF;
+	font-family: "Montserrat";
+}
+
+body {
+  background-color: #101010;
+}
+
+.intro {
+	background-image: url("assets/runningImage.jpg");
+	height: 800px;
+	position: relative;
+}
+.intro_text {
+	position: absolute;
+	width: 60%;
+	bottom: 50px;
+	right: 50px;
+}
+.intro_text h3{
+	color: #FFFFFF;
+}
+.intro_text a, i{
+	text-decoration:none;
+	color: #FFA500;
+}
+.intro_text i{
+	color: #FFA500;
+}
+div.content_run {
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: #000000;
+}
+div.content_bike {
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: #000000;
+}
+
+.flex-container {
+    display: flex;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.flex-child {
+    flex: 2;
+    margin-right: 5%;
+}
+.flex-child:first-child {
+    flex: 3;
+    margin-right: 5%;
+}
+
+#map_run {
+  height: 400px;
+}
+
+#stat_run {
+  height: 400px;
+}
+
+#map_bike {
+  height: 400px;
+}
+
+#stat_bike {
+  height: 400px;
+}
+
+/* Optional: Makes the sample page fill the window.
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+*/

@@ -1,0 +1,32 @@
+<html>
+  <body>
+    <div class="container" style="width:1400px; text-align:center">
+      <br>
+      <h1 style="color:rgb(140, 0, 0)"> Blood Pressure Predictor </h1>
+      <br>
+      <h3 style="color:rgb(140, 0, 0)"> Fill out the form to get your Blood Pressure estimate! </h3>
+      <br>
+      <br>
+
+      <form action="" method="post">
+        <label style="font-size: 24px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Age <text style="color:red">*</text>
+        </b></label>
+        <input type="number" placeholder="enter age in years" name="age" value="{{request.form.age}}" required>
+        <br><br><br>
+
+        <label style="font-size: 24px;"><b>
+          Weight <text style="color:red">*</text>
+        </b></label>
+        <input type="number" placeholder="enter weight in kg" name="weight" value="{{request.form.weight}}" required>
+        <br><br><br>
+
+        <input class="btn btn-default" style="color:white; font-size:20px; background-color: rgb(80, 106, 167);" type="submit" value="Calculate">
+      </form>
+
+      {% if result %}
+        <p class="Result"><strong> Predicted Blood Pressure:</strong> {{ result }}
+      {% endif %}
+    </div>
+  </body>
+</html>

@@ -106,13 +106,13 @@ analytics:
 author:
   name             : "Mustafa Talha Avcu"
   avatar           : "/assets/images/profile_picture.jpg"
-  bio              : "I am a MSc student in Computer Science at the University of Southern California"
-  location         : "Los Angeles, California"
+  bio              : "Software Engineer based in Seattle. M.S. in Computer Science at USC."
+  location         : "Seattle, WA"
   email            :
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:avcu@usc.edu"
+      url: "mailto:itsavcu@gmail.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"

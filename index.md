@@ -11,8 +11,8 @@ cities [here][routes].
 I finished my Master's in Computer Science at the University of Southern
 California(USC). I started at USC as a PhD student in Electrical and Electronics
 Engineering and worked in a brain computer interface(BCI) laboratory as a
-research assistant. I was working at the intersection of statistical signal
-processing and control theory, trying to develop models for large-scale brain
+research assistant. I had worked at the intersection of statistical signal
+processing and control theory, aiming to develop models for large-scale brain
 networks during direct electrical stimulation. These models are ultimately
 designed to be used for control purposes in closed-loop BCI applications.
 
@@ -24,6 +24,6 @@ traditional machine learning and deep learning approaches, and developed
 [SeizNet][SeizNet].
 
 
-[routes]: https://avcu.github.io/tracks/sample.html
+[routes]: tracks/sample.html
 [A_STAR]: https://www.a-star.edu.sg/
 [SeizNet]: https://ieeexplore.ieee.org/abstract/document/8683229
