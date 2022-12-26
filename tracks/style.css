@@ -7,20 +7,22 @@
 }
 
 body {
-  background-color: #21252a;
+  background-color: #101010;
 }
 
 .intro {
 	background-image: url("assets/runningImage.jpg");
-	background-position: top 600px left 0px;
-	height: 600px;
+	height: 800px;
+	position: relative;
 }
 .intro_text {
-	width: 45%;
-	margin-left: 5%;
+	position: absolute;
+	width: 60%;
+	bottom: 50px;
+	right: 50px;
 }
 .intro_text h3{
-	color: #000000;
+	color: #FFFFFF;
 }
 .intro_text a, i{
 	text-decoration:none;
@@ -32,12 +34,12 @@ body {
 div.content_run {
   margin-left: 5%;
   margin-right: 5%;
-  background-color: #11141c;
+  background-color: #000000;
 }
 div.content_bike {
   margin-left: 5%;
   margin-right: 5%;
-  background-color: #11141c;
+  background-color: #000000;
 }
 
 .flex-container {
