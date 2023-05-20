@@ -4,10 +4,6 @@ author_profile: true
 title: "About Me"
 ---
 
-I am a Software Engineer based in Seattle. Outside work, I like to run, bike and
-hike. You can find some of the routes that I have run and biked in several
-cities [here][routes].
-
 I finished my Master's in Computer Science at the University of Southern
 California(USC). I started at USC as a PhD student in Electrical and Electronics
 Engineering and worked in a brain computer interface(BCI) laboratory as a
