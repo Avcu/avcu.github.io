@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Building GitHub Pages using Docker -</title>
-<meta name="description" content="This website is built using Jekyll with Minimal Mistakes theme and hosted on GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll. Ruby is a programming language, RubyGems is a package manager for Ruby just like pip for Python and finally Jekyll is a gem that converts markdowns to html codes.  Here, we will see how we can use docker to handle all these in an easy and clear way.">
+<meta name="description" content="This website is built using Jekyll with Minimal Mistakes theme and hosted on GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll. Ruby is a programming language, RubyGems is a package manager for Ruby just like pip for Python and finally Jekyll is a gem that converts markdowns to html codes.  Here, we will see how we can use docker to handle all these in an easy and clear way.  Step 1: Create a container with Ruby  Once a Github Page Theme is forked and cloned locally, we need to create a container with Ruby. Create a file called Dockerfile with the following content  FROM ruby:2.5  WORKDIR /usr/src/app  # we put README.md as placeholder, because Docker cannot create empty container COPY README.md ./  #create volume for later mounting of your local directory VOLUME /usr/src/app  And then, build a container  docker build -t my-ruby-env .   Step 2: Generate Gemfile.lock  Generate a Gemfile.lock for minimal-mistakes theme  docker run --volume=&quot;${PWD}:/usr/src/app&quot; -it my-ruby-env bundle install   Step 3: Create a container for the website to run locally  Make sure that port and host are defined in the _config.yml, and modify the Dockerfile as follows  FROM ruby:2.5  RUN bundle config --global frozen 1  WORKDIR /usr/src/app  # prepare to install ruby packages into container COPY Gemfile Gemfile.lock minimal-mistakes-jekyll.gemspec ./  RUN bundle install  VOLUME /usr/src/app  EXPOSE 4000  CMD [&quot;jekyll&quot;, &quot;serve&quot;]   Finally, run the following commands to build the container and run it.  docker build -t minimal-mistakes . docker run --volume=&quot;${PWD}:/usr/src/app&quot; -p 4000:4000 -t minimal-mistakes">
 
 
   <meta name="author" content="Mustafa Talha Avcu">
@@ -23,29 +23,29 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
 <meta property="og:title" content="Building GitHub Pages using Docker">
-<meta property="og:url" content="https://avcu.github.io/programming/building-github-pages-using-docker/">
+<meta property="og:url" content="http://0.0.0.0:4000/programming/building-github-pages-using-docker/">
 
 
-  <meta property="og:description" content="This website is built using Jekyll with Minimal Mistakes theme and hosted on GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll. Ruby is a programming language, RubyGems is a package manager for Ruby just like pip for Python and finally Jekyll is a gem that converts markdowns to html codes.  Here, we will see how we can use docker to handle all these in an easy and clear way.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2022-01-21T00:00:00-06:00">
+  <meta property="og:description" content="This website is built using Jekyll with Minimal Mistakes theme and hosted on GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll. Ruby is a programming language, RubyGems is a package manager for Ruby just like pip for Python and finally Jekyll is a gem that converts markdowns to html codes.  Here, we will see how we can use docker to handle all these in an easy and clear way.  Step 1: Create a container with Ruby  Once a Github Page Theme is forked and cloned locally, we need to create a container with Ruby. Create a file called Dockerfile with the following content  FROM ruby:2.5  WORKDIR /usr/src/app  # we put README.md as placeholder, because Docker cannot create empty container COPY README.md ./  #create volume for later mounting of your local directory VOLUME /usr/src/app  And then, build a container  docker build -t my-ruby-env .   Step 2: Generate Gemfile.lock  Generate a Gemfile.lock for minimal-mistakes theme  docker run --volume=&quot;${PWD}:/usr/src/app&quot; -it my-ruby-env bundle install   Step 3: Create a container for the website to run locally  Make sure that port and host are defined in the _config.yml, and modify the Dockerfile as follows  FROM ruby:2.5  RUN bundle config --global frozen 1  WORKDIR /usr/src/app  # prepare to install ruby packages into container COPY Gemfile Gemfile.lock minimal-mistakes-jekyll.gemspec ./  RUN bundle install  VOLUME /usr/src/app  EXPOSE 4000  CMD [&quot;jekyll&quot;, &quot;serve&quot;]   Finally, run the following commands to build the container and run it.  docker build -t minimal-mistakes . docker run --volume=&quot;${PWD}:/usr/src/app&quot; -p 4000:4000 -t minimal-mistakes">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2022-01-21T00:00:00+00:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://avcu.github.io/programming/building-github-pages-using-docker/">
+
+<link rel="canonical" href="http://0.0.0.0:4000/programming/building-github-pages-using-docker/">
 
 
 
@@ -56,7 +56,7 @@
     
       "@type": "Person",
       "name": "Mustafa Talha Avcu",
-      "url": "https://avcu.github.io/"
+      "url": "http://0.0.0.0:4000/"
     
   }
 </script>
@@ -156,7 +156,7 @@
 
   
     <div class="author__avatar">
-      <a href="https://avcu.github.io/">
+      <a href="http://0.0.0.0:4000/">
         <img src="/assets/images/profile_picture.jpg" alt="Mustafa Talha Avcu" itemprop="image" class="u-photo">
       </a>
     </div>
@@ -164,11 +164,11 @@
 
   <div class="author__content">
     <h3 class="author__name p-name" itemprop="name">
-      <a class="u-url" rel="me" href="https://avcu.github.io/" itemprop="url">Mustafa Talha Avcu</a>
+      <a class="u-url" rel="me" href="http://0.0.0.0:4000/" itemprop="url">Mustafa Talha Avcu</a>
     </h3>
     
       <div class="author__bio p-note" itemprop="description">
-        <p>Software Engineer based in Seattle. M.S. in Computer Science at USC.</p>
+        <p>Software Engineer based in New York City. M.S. in Computer Science at USC.</p>
 
       </div>
     
@@ -179,7 +179,7 @@
     <ul class="author__urls social-icons">
       
         <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
-          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Seattle, WA</span>
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">NY, US</span>
         </li>
       
 
@@ -270,15 +270,15 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Building GitHub Pages using Docker">
-    <meta itemprop="description" content="This website is built using Jekyll with Minimal Mistakes theme and hosted onGitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll.Ruby is a programming language, RubyGems is a package manager for Ruby just likepip for Python and finally Jekyll is a gem that converts markdowns to html codes. Here, we will see how we can use docker to handle all these in an easy and clearway.">
-    <meta itemprop="datePublished" content="2022-01-21T00:00:00-06:00">
+    <meta itemprop="description" content="This website is built using Jekyll with Minimal Mistakes theme and hosted onGitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll.Ruby is a programming language, RubyGems is a package manager for Ruby just likepip for Python and finally Jekyll is a gem that converts markdowns to html codes. Here, we will see how we can use docker to handle all these in an easy and clearway.Step 1: Create a container with RubyOnce a Github Page Theme is forked and cloned locally, we need to create acontainer with Ruby. Create a file called Dockerfile with the following contentFROM ruby:2.5WORKDIR /usr/src/app# we put README.md as placeholder, because Docker cannot create empty containerCOPY README.md ./#create volume for later mounting of your local directoryVOLUME /usr/src/appAnd then, build a containerdocker build -t my-ruby-env .Step 2: Generate Gemfile.lockGenerate a Gemfile.lock for minimal-mistakes themedocker run --volume=&quot;${PWD}:/usr/src/app&quot; -it my-ruby-env bundle installStep 3: Create a container for the website to run locallyMake sure that port and host are defined in the _config.yml, and modify theDockerfile as followsFROM ruby:2.5RUN bundle config --global frozen 1WORKDIR /usr/src/app# prepare to install ruby packages into containerCOPY Gemfile Gemfile.lock minimal-mistakes-jekyll.gemspec ./RUN bundle installVOLUME /usr/src/appEXPOSE 4000CMD [&quot;jekyll&quot;, &quot;serve&quot;]Finally, run the following commands to build the container and run it.docker build -t minimal-mistakes .docker run --volume=&quot;${PWD}:/usr/src/app&quot; -p 4000:4000 -t minimal-mistakes">
+    <meta itemprop="datePublished" content="2022-01-21T00:00:00+00:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://avcu.github.io/programming/building-github-pages-using-docker/" class="u-url" itemprop="url">Building GitHub Pages using Docker
+            <a href="http://0.0.0.0:4000/programming/building-github-pages-using-docker/" class="u-url" itemprop="url">Building GitHub Pages using Docker
 </a>
           </h1>
           
@@ -338,7 +338,7 @@ VOLUME /usr/src/app
 
 <p>Generate a <code class="language-plaintext highlighter-rouge">Gemfile.lock</code> for minimal-mistakes theme</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --volume="$PWD:/usr/src/app" -it my-ruby-env bundle install
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --volume="${PWD}:/usr/src/app" -it my-ruby-env bundle install
 </code></pre></div></div>
 
 <h2 id="step-3-create-a-container-for-the-website-to-run-locally">Step 3: Create a container for the website to run locally</h2>
@@ -367,13 +367,7 @@ CMD ["jekyll", "serve"]
 <p>Finally, run the following commands to build the container and run it.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t minimal-mistakes .
-docker run --volume="$PWD:/usr/src/app" -p 4000:4000 -t minimal-mistakes
-</code></pre></div></div>
-
-<h2 id="step-4-publish-it-on-github">Step 4: Publish it on GitHub</h2>
-
-<p>Now, we can build the site in production mode and upload the <code class="language-plaintext highlighter-rouge">_site</code> to Github.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --rm -it --volume="$PWD:/srv/jekyll" --volume="$PWD:/usr/src/app" --env JEKYLL_ENV=production jekyll/jekyll:3.8 jekyll build
+docker run --volume="${PWD}:/usr/src/app" -p 4000:4000 -t minimal-mistakes
 </code></pre></div></div>
 
         
@@ -418,7 +412,7 @@ docker run --volume="$PWD:/usr/src/app" -p 4000:4000 -t minimal-mistakes
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-01-21T00:00:00-06:00">January 21, 2022</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-01-21T00:00:00+00:00">January 21, 2022</time></p>
 
       </footer>
 
@@ -427,11 +421,11 @@ docker run --volume="$PWD:/usr/src/app" -p 4000:4000 -t minimal-mistakes
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Building+GitHub+Pages+using+Docker%20https%3A%2F%2Favcu.github.io%2Fprogramming%2Fbuilding-github-pages-using-docker%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Building+GitHub+Pages+using+Docker%20http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Fbuilding-github-pages-using-docker%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Favcu.github.io%2Fprogramming%2Fbuilding-github-pages-using-docker%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Fbuilding-github-pages-using-docker%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Favcu.github.io%2Fprogramming%2Fbuilding-github-pages-using-docker%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Fbuilding-github-pages-using-docker%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -539,7 +533,7 @@ Most of the examples are from Github - B...</p>
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2023 Mustafa Talha Avcu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2026 Mustafa Talha Avcu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

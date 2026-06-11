@@ -106,8 +106,8 @@ analytics:
 author:
   name             : "Mustafa Talha Avcu"
   avatar           : "/assets/images/profile_picture.jpg"
-  bio              : "Software Engineer based in Seattle. M.S. in Computer Science at USC."
-  location         : "Seattle, WA"
+  bio              : "Software Engineer based in New York City. M.S. in Computer Science at USC."
+  location         : "NY, US"
   email            :
   links:
     - label: "Email"

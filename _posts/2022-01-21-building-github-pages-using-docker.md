@@ -41,7 +41,7 @@ docker build -t my-ruby-env .
 Generate a `Gemfile.lock` for minimal-mistakes theme
 
 ```
-docker run --volume="$PWD:/usr/src/app" -it my-ruby-env bundle install
+docker run --volume="${PWD}:/usr/src/app" -it my-ruby-env bundle install
 ```
 
 ## Step 3: Create a container for the website to run locally
@@ -72,12 +72,5 @@ Finally, run the following commands to build the container and run it.
 
 ```
 docker build -t minimal-mistakes .
-docker run --volume="$PWD:/usr/src/app" -p 4000:4000 -t minimal-mistakes
-```
-
-## Step 4: Publish it on GitHub
-
-Now, we can build the site in production mode and upload the `_site` to Github.
-```
-docker run --rm -it --volume="$PWD:/srv/jekyll" --volume="$PWD:/usr/src/app" --env JEKYLL_ENV=production jekyll/jekyll:3.8 jekyll build
+docker run --volume="${PWD}:/usr/src/app" -p 4000:4000 -t minimal-mistakes
 ```
