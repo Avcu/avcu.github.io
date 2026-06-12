@@ -20,7 +20,7 @@ Once a Github Page Theme is forked and cloned locally, we need to create a
 container with Ruby. Create a file called `Dockerfile` with the following content
 
 ```
-FROM ruby:2.5
+FROM ruby:3.0
 
 WORKDIR /usr/src/app
 
@@ -50,7 +50,7 @@ Make sure that `port` and `host` are defined in the `_config.yml`, and modify th
 `Dockerfile` as follows
 
 ```
-FROM ruby:2.5
+FROM ruby:3.0
 
 RUN bundle config --global frozen 1
 
