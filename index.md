@@ -17,9 +17,9 @@ to be used for control purposes in closed-loop BCI applications.
 
 I received my B.S. in Electrical and Electronics Engineering at Bilkent University 
 in 2019. I spent a summer as a Data Science Intern in Agency for Science, Technology 
-and Research ([A*STAR][A_STAR]) in Singapore. I studied on the detection of epileptic 
-seizures based on EEG data by using both traditional machine learning and deep learning 
-approaches, and developed [SeizNet][SeizNet].
+and Research ([A*STAR][A_STAR]) in Singapore. I investigated epileptic seizure detection 
+using a minimal number of EEG channels by using both traditional machine learning and 
+deep learning approaches, and developed [SeizNet][SeizNet].
 
 Outside of work, I like to be outside, walking, running, biking and collecting 
 [geocaches][geocacheAccount]. 
