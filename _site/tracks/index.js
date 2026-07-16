@@ -42,7 +42,7 @@ function renderRunningData(content){
 
   let divText = document.createElement('h4');
   strStatRun = ""
-  strStatRun += "Number of activity: " + content['num_track'] +"\n"
+  strStatRun += "Number of fdfd: " + content['num_track'] +"\n"
   strStatRun += "Total distance: " + content['tot_distance_km'].toFixed(1) +" km \n"
   /*
   for (var key in content){

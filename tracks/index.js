@@ -1,5 +1,6 @@
 // Initialize and add the map
-const myHome = { lat: 34.01843, lng: -118.29527 };
+const losAngeles = { lat: 34.01843, lng: -118.29527 };
+const newYork = {lat: 40.75903, lng:-73.95950};
 let running_stats = "https://avcu.github.io/tracks/data/running_stats.json";
 let biking_stats = "https://avcu.github.io/tracks/data/biking_stats.json";
 
@@ -7,7 +8,7 @@ function initMap() {
   const map_run = new google.maps.Map(document.getElementById("map_run"), {
     mapId: "8e0a97af9386fef",
     zoom: 12,
-    center: myHome,
+    center: newYork,
   });
   const runKML = new google.maps.KmlLayer({
     url: "https://avcu.github.io/tracks/data/tracks_run.kml",
@@ -17,7 +18,7 @@ function initMap() {
 
   const map_bike = new google.maps.Map(document.getElementById("map_bike"), {
     zoom: 11,
-    center: myHome,
+    center: losAngeles,
   });
   const bikeKML = new google.maps.KmlLayer({
     url: "https://avcu.github.io/tracks/data/tracks_bike.kml",
