@@ -2,24 +2,21 @@
 <html>
   <head>
     <title>Simple Map</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
 
   <body>
     <div class="intro">
       <div class="intro_text">
-        <h3>I love running and biking. Here, I visualized the routes that I have run
-          and biked in several cities. You can also find some links to the tools that I used to prepare this page.
-          In the beginning of 2020, I got more into running and biking mainly because of COVID confining us in small places that
-          I could barely afford with my PhD stipend. So, I spent more and more time doing both.
+        <h3>I love running and biking. On this page, I visualized the routes that I have run
+          and biked in several cities. You can also find several links to the tools that I used to prepare this page.
         </h3><br>
         <h3> <i>Technical details:</i> Preparing this website is two steps. First, I wrote a
           <a href="https://github.com/Avcu/GPX-data-pipeline">Python script</a>
           that processes given GPX (this is how fitness/tracking apps store your geospatial data) files, and
-          creates a KML file with all the tracks and a JSON file to store some statistics. Then, the KML file is
+          creates a KML file with all the tracks and a JSON file to store aggregate statistics. Then, the KML file is
           provided to <a href="https://developers.google.com/maps/documentation/javascript/overview">Maps Javascript API</a>,
-          while we load the JSON file to display the statistics. Feel free to contact me for any suggestions and/or questions.
+          while we load the JSON file to display the statistics.
         </h3>
       </div>
       <br><br>

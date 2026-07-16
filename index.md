@@ -21,9 +21,10 @@ and Research ([A*STAR][A_STAR]) in Singapore. I investigated epileptic seizure d
 using a minimal number of EEG channels by using both traditional machine learning and 
 deep learning approaches, and developed [SeizNet][SeizNet].
 
-Outside of work, I like to be outside, walking, running, biking and collecting 
+Outside of work, I like to be outside, [walking, running, biking][tracks] and collecting 
 [geocaches][geocacheAccount]. 
 
 [A_STAR]: https://www.a-star.edu.sg/
 [SeizNet]: https://ieeexplore.ieee.org/abstract/document/8683229
+[tracks]: https://avcu.github.io/tracks/sample.html
 [geocacheAccount]: https://www.geocaching.com/p/?guid=469c2081-259a-4585-848e-ac207a51f265

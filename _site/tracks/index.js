@@ -4,17 +4,11 @@ let running_stats = "https://avcu.github.io/tracks/data/running_stats.json";
 let biking_stats = "https://avcu.github.io/tracks/data/biking_stats.json";
 
 function initMap() {
-  // The location of Uluru
-  // The map, centered at Uluru
   const map_run = new google.maps.Map(document.getElementById("map_run"), {
     mapId: "8e0a97af9386fef",
     zoom: 12,
     center: myHome,
   });
-  // const marker_one = new google.maps.Marker({
-  //   position: myHome,
-  //   map: map_run,
-  // });
   const runKML = new google.maps.KmlLayer({
     url: "https://avcu.github.io/tracks/data/tracks_run.kml",
     map: map_run,
@@ -48,7 +42,7 @@ function renderRunningData(content){
 
   let divText = document.createElement('h4');
   strStatRun = ""
-  strStatRun += "Number of runs: " + content['num_track'] +"\n"
+  strStatRun += "Number of activity: " + content['num_track'] +"\n"
   strStatRun += "Total distance: " + content['tot_distance_km'].toFixed(1) +" km \n"
   /*
   for (var key in content){
@@ -63,7 +57,7 @@ function renderBikingData(content){
 
   let divText = document.createElement('h4');
   strStatBike = ""
-  strStatBike += "Number of bikings: " + content['num_track'] +"\n"
+  strStatBike += "Number of activity: " + content['num_track'] +"\n"
   strStatBike += "Total distance: " + content['tot_distance_km'].toFixed(1) +" km \n"
   divText.innerText = strStatBike;
   divStatBike.appendChild(divText);
