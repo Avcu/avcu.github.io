@@ -1,74 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Simple Map</title>
-    <link rel="stylesheet" type="text/css" href="./style.css" />
-  </head>
 
-  <body>
-    <div class="intro">
-      <div class="intro_text">
-        <h3>I love walking, running and biking. On this page, I visualized the routes that I have taken.
-          You can also find several links to the tools that I used to prepare this page.
-        </h3><br>
-        <h3> <i>Technical details:</i> Preparing this website is two steps. First, I wrote a
-          <a href="https://github.com/Avcu/GPX-data-pipeline">small data pipeline in Python</a>
-          that processes given GPX (this is how fitness/tracking apps store your geospatial data) files, and
-          creates a KML file with all the tracks and a JSON file to store aggregate statistics. Then, the KML file is
-          provided to <a href="https://developers.google.com/maps/documentation/javascript/overview">Maps Javascript API</a>,
-          while we load the JSON file to display the statistics.
-        </h3>
-      </div>
-      <br><br>
+<head>
+  <title>Simple Map</title>
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+</head>
+
+<body>
+  <div class="intro">
+    <div class="intro_text">
+      <h3>I love walking, running and biking. On this page, I visualized the routes that I have taken.
+        You can also find several links to the tools that I used to prepare this page.
+      </h3><br>
+      <h3> <i>Technical details:</i> Preparing this website is two steps. First, I wrote a
+        <a href="https://github.com/Avcu/GPX-data-pipeline">small data pipeline in Python</a>
+        that processes given GPX (this is how fitness/tracking apps store your geospatial data) files, and
+        creates a KML file with all the tracks and a JSON file to store aggregate statistics. Then, the KML file is
+        provided to <a href="https://developers.google.com/maps/documentation/javascript/overview">Maps Javascript
+          API</a>,
+        while we load the JSON file to display the statistics.
+      </h3>
     </div>
+    <br><br>
+  </div>
+  <br>
+
+  <div class="content_run">
     <br>
-
-    <div class="content_run">
-      <br>
-      <h1 style="text-align:center;">Running</h1>
-      <br>
-      <div class="flex-container">
-        <div class="flex-child" id="map_run"></div>
-        <div class="flex-child" id="stat_run">
-          <div class="control-group">
-            <label for="city_select_run">Choose City</label>
-            <select id="city_select_run" class="city-select">
-              <option value="New York, NY" selected>New York, NY</option>
-              <option value="Los Angeles, CA">Los Angeles, CA</option>
-              <option value="Seattle, WA">Seattle, WA</option>
-              <option value="Toronto, ON">Toronto, ON</option>
-            </select>
-          </div>
+    <h1 style="text-align:center;">Running</h1>
+    <br>
+    <div class="flex-container">
+      <div class="flex-child" id="map_run"></div>
+      <div class="flex-child" id="stat_run">
+        <div class="control-group">
+          <label for="city_select_run">Choose City</label>
+          <select id="city_select_run" class="city-select">
+            <option value="New York, NY" selected>New York, NY</option>
+            <option value="Los Angeles, CA">Los Angeles, CA</option>
+            <option value="Seattle, WA">Seattle, WA</option>
+            <option value="Toronto, ON">Toronto, ON</option>
+          </select>
         </div>
       </div>
-      <br><br>
     </div>
-    <br><br><br>
-    <div class="content_bike">
-      <br>
-      <h1 style="text-align:center;">Biking</h1>
-      <br>
-      <div class="flex-container">
-        <div class="flex-child" id="map_bike"></div>
-        <div class="flex-child" id="stat_bike">
-          <div class="control-group">
-            <label for="city_select_bike">Choose City</label>
-            <select id="city_select_bike" class="city-select">
-              <option value="Los Angeles, CA" selected>Los Angeles, CA</option>
-              <option value="New York, NY">New York, NY</option>
-              <option value="Seattle, WA">Seattle, WA</option>
-              <option value="Toronto, ON">Toronto, ON</option>
-            </select>
-          </div>
+    <br><br>
+  </div>
+  <br><br><br>
+  <div class="content_bike">
+    <br>
+    <h1 style="text-align:center;">Biking</h1>
+    <br>
+    <div class="flex-container">
+      <div class="flex-child" id="map_bike"></div>
+      <div class="flex-child" id="stat_bike">
+        <div class="control-group">
+          <label for="city_select_bike">Choose City</label>
+          <select id="city_select_bike" class="city-select">
+            <option value="New York, NY">New York, NY</option>
+            <option value="Los Angeles, CA" selected>Los Angeles, CA</option>
+            <option value="Seattle, WA">Seattle, WA</option>
+            <option value="Toronto, ON">Toronto, ON</option>
+          </select>
         </div>
       </div>
-      <br><br>
     </div>
-    <br><br><br>
+    <br><br>
+  </div>
+  <br><br><br>
 
-    <!-- Async script executes immediately and must be after any DOM elements used in callback.-->
-    <script src="./index.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzKVlpdkTTyUTqb96A7sXs_EhF6dfC-Ao&callback=initMap&v=weekly" async></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-  </body>
+  <!-- Async script executes immediately and must be after any DOM elements used in callback.-->
+  <script src="./index.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzKVlpdkTTyUTqb96A7sXs_EhF6dfC-Ao&callback=initMap&v=weekly"
+    async></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+
 </html>

@@ -1,6 +1,9 @@
 // Initialize and add the map
-let map_run;
-let map_bike;
+let runMap;
+let bikeMap;
+
+let runKmlLayer;
+let bikeKmlLayer;
 
 const locations = {
   "Los Angeles, CA": { lat: 34.01842, lng: -118.29528 },
@@ -9,33 +12,49 @@ const locations = {
   "New York, NY": { lat: 40.72544, lng: -73.99678 }
 };
 
-let running_stats = "./data/running_stats.json";
-let biking_stats = "./data/biking_stats.json";
+// TODO: Implement dynamic mapping that would eliminate this hard-coded values below
+const running_kml_paths = {
+  "Los Angeles, CA": "https://avcu.github.io/tracks/data/kml_files/tracks_run_los_angeles.kml",
+  "Seattle, WA": "https://avcu.github.io/tracks/data/kml_files/tracks_run_seattle.kml",
+  "Toronto, ON": "https://avcu.github.io/tracks/data/kml_files/tracks_run_toronto.kml",
+  "New York, NY": "https://avcu.github.io/tracks/data/kml_files/tracks_run_new_york.kml"
+}
+
+// TODO: Implement dynamic mapping that would eliminate this hard-coded values below
+const biking_kml_paths = {
+  "Los Angeles, CA": "https://avcu.github.io/tracks/data/kml_files/tracks_bike_los_angeles.kml",
+  "Seattle, WA": "https://avcu.github.io/tracks/data/kml_files/tracks_bike_seattle.kml",
+  "Toronto, ON": "https://avcu.github.io/tracks/data/kml_files/tracks_bike_toronto.kml",
+  "New York, NY": "https://avcu.github.io/tracks/data/kml_files/tracks_bike_new_york.kml"
+}
+
+let running_stats = "./data/json_files/running_stats.json";
+let biking_stats = "./data/json_files/biking_stats.json";
 
 let runningStatsData = null;
 let bikingStatsData = null;
 
 function initMap() {
-  map_run = new google.maps.Map(document.getElementById("map_run"), {
-    zoom: 12,
+  runMap = new google.maps.Map(document.getElementById("map_run"), {
+    zoom: 11,
     center: locations["New York, NY"],
     disableDefaultUI: true,
   });
-  const runKML = new google.maps.KmlLayer({
-    url: "https://avcu.github.io/tracks/data/tracks_run.kml",
+  runKmlLayer = new google.maps.KmlLayer({
+    url: running_kml_paths["New York, NY"],
     preserveViewport: true,
-    map: map_run,
+    map: runMap,
   });
 
-  map_bike = new google.maps.Map(document.getElementById("map_bike"), {
+  bikeMap = new google.maps.Map(document.getElementById("map_bike"), {
     zoom: 11,
     center: locations["Los Angeles, CA"],
     disableDefaultUI: true,
   });
-  const bikeKML = new google.maps.KmlLayer({
-    url: "https://avcu.github.io/tracks/data/tracks_bike.kml",
+  bikeKmlLayer = new google.maps.KmlLayer({
+    url: biking_kml_paths["Los Angeles, CA"],
     preserveViewport: true,
-    map: map_bike,
+    map: bikeMap,
   });
 
   // Setup city selectors
@@ -48,9 +67,17 @@ function setupCitySelectors() {
     selectRun.addEventListener("change", (event) => {
       const city = event.target.value;
       const coords = locations[city];
-      if (coords && map_run) {
-        map_run.setCenter(coords);
+      if (coords && runMap) {
+        runMap.setCenter(coords);
       }
+      if (runKmlLayer) {
+        runKmlLayer.setMap(null); // remove old layer
+      }
+      runKmlLayer = new google.maps.KmlLayer({
+        url: running_kml_paths[city],
+        preserveViewport: true,
+        map: runMap,
+      });
       if (runningStatsData) {
         renderRunningData(runningStatsData, city);
       }
@@ -62,9 +89,17 @@ function setupCitySelectors() {
     selectBike.addEventListener("change", (event) => {
       const city = event.target.value;
       const coords = locations[city];
-      if (coords && map_bike) {
-        map_bike.setCenter(coords);
+      if (coords && bikeMap) {
+        bikeMap.setCenter(coords);
       }
+      if (bikeKmlLayer) {
+        bikeKmlLayer.setMap(null); // remove old layer
+      }
+      bikeKmlLayer = new google.maps.KmlLayer({
+        url: biking_kml_paths[city],
+        preserveViewport: true,
+        map: bikeMap,
+      });
       if (bikingStatsData) {
         renderBikingData(bikingStatsData, city);
       }
