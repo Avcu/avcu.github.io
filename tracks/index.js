@@ -41,7 +41,7 @@ function initMap() {
     disableDefaultUI: true,
   });
   runKmlLayer = new google.maps.KmlLayer({
-    url: running_kml_paths["New York, NY"],
+    url: running_kml_paths["New York, NY"] + "?v=" + Date.now(),
     preserveViewport: true,
     map: runMap,
   });
@@ -52,7 +52,7 @@ function initMap() {
     disableDefaultUI: true,
   });
   bikeKmlLayer = new google.maps.KmlLayer({
-    url: biking_kml_paths["Los Angeles, CA"],
+    url: biking_kml_paths["Los Angeles, CA"] + "?v=" + Date.now(),
     preserveViewport: true,
     map: bikeMap,
   });
@@ -74,7 +74,7 @@ function setupCitySelectors() {
         runKmlLayer.setMap(null); // remove old layer
       }
       runKmlLayer = new google.maps.KmlLayer({
-        url: running_kml_paths[city],
+        url: running_kml_paths[city] + "?v=" + Date.now(),
         preserveViewport: true,
         map: runMap,
       });
@@ -96,7 +96,7 @@ function setupCitySelectors() {
         bikeKmlLayer.setMap(null); // remove old layer
       }
       bikeKmlLayer = new google.maps.KmlLayer({
-        url: biking_kml_paths[city],
+        url: biking_kml_paths[city] + "?v=" + Date.now(),
         preserveViewport: true,
         map: bikeMap,
       });

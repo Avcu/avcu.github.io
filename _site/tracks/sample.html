@@ -15,10 +15,11 @@
       <h3> <i>Technical details:</i> Preparing this website is two steps. First, I wrote a
         <a href="https://github.com/Avcu/GPX-data-pipeline">small data pipeline in Python</a>
         that processes given GPX (this is how fitness/tracking apps store your geospatial data) files, and
-        creates a KML file with all the tracks and a JSON file to store aggregate statistics. Then, the KML file is
-        provided to <a href="https://developers.google.com/maps/documentation/javascript/overview">Maps Javascript
+        creates KML files with geo-location information and JSON files to store aggregate statistics by city.
+        Then, KML files are provided to <a
+          href="https://developers.google.com/maps/documentation/javascript/overview">Maps Javascript
           API</a>,
-        while we load the JSON file to display the statistics.
+        while we load the JSON files to display the statistics.
       </h3>
     </div>
     <br><br>
