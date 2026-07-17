@@ -17,14 +17,14 @@ let bikingStatsData = null;
 
 function initMap() {
   map_run = new google.maps.Map(document.getElementById("map_run"), {
-    zoom: 12,
+    zoom: 11,
     center: locations["New York, NY"],
     disableDefaultUI: true,
   });
   const runKML = new google.maps.KmlLayer({
     url: "https://avcu.github.io/tracks/data/tracks_run.kml",
-    map: map_run,
     preserveViewport: true,
+    map: map_run,
   });
 
   map_bike = new google.maps.Map(document.getElementById("map_bike"), {
@@ -34,6 +34,7 @@ function initMap() {
   });
   const bikeKML = new google.maps.KmlLayer({
     url: "https://avcu.github.io/tracks/data/tracks_bike.kml",
+    preserveViewport: true,
     map: map_bike,
   });
 
