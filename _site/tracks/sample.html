@@ -9,17 +9,16 @@
 <body>
   <div class="intro">
     <div class="intro_text">
-      <h3>I love walking, running and biking. On this page, I visualized the routes that I have taken.
-        You can also find several links to the tools that I used to prepare this page.
+      <h3>I love walking, running and biking. On this page, I visualized the routes that I have taken. You can
+        find more information about the data pipeline I created to power this page.
       </h3><br>
-      <h3> <i>Technical details:</i> Preparing this website is two steps. First, I wrote a
-        <a href="https://github.com/Avcu/GPX-data-pipeline">small data pipeline in Python</a>
-        that processes given GPX (this is how fitness/tracking apps store your geospatial data) files, and
+      <h3> <i>Technical details:</i> Preparing this website is a two-step process. First, I wrote a
+        <a href="https://github.com/Avcu/GPX-data-pipeline"> data pipeline in Python</a>
+        that processes GPX (this is how fitness/tracking apps store your geospatial data) files, and
         creates KML files with geo-location information and JSON files to store aggregate statistics by city.
-        Then, KML files are provided to <a
+        Then, based on the selected city corresponding KML file is provided to <a
           href="https://developers.google.com/maps/documentation/javascript/overview">Maps Javascript
-          API</a>,
-        while we load the JSON files to display the statistics.
+          API</a> while aggregate statistics in the JSON files are directly shown on the page.
       </h3>
     </div>
     <br><br>

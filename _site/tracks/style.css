@@ -3,7 +3,7 @@
   padding: 0;
   border: 0;
   color: #FFFFFF;
-  font-family: "Montserrat";
+  font-family: "Arial";
 }
 
 body {
@@ -17,7 +17,6 @@ body {
 }
 
 .intro_text {
-  font-family: "Montserrat", sans-serif;
   position: absolute;
   width: 60%;
   bottom: 50px;
@@ -119,7 +118,6 @@ body {
   max-width: 280px;
   padding: 10px 36px 10px 12px;
   font-size: 15px;
-  font-family: "Montserrat", sans-serif;
   color: #ffffff;
   background-color: #1a1a1a;
   border: 1px solid #333333;
