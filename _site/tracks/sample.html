@@ -9,16 +9,17 @@
 <body>
   <div class="intro">
     <div class="intro_text">
-      <h3>I love walking, running and biking. On this page, I visualized the routes that I have taken. You can
-        find more information about the data pipeline I created to power this page.
-      </h3><br>
-      <h3> <i>Technical details:</i> Preparing this website is a two-step process. First, I wrote a
-        <a href="https://github.com/Avcu/GPX-data-pipeline"> data pipeline in Python</a>
-        that processes GPX (this is how fitness/tracking apps store your geospatial data) files, and
-        creates KML files with geo-location information and JSON files to store aggregate statistics by city.
-        Then, based on the selected city corresponding KML file is provided to <a
-          href="https://developers.google.com/maps/documentation/javascript/overview">Maps Javascript
-          API</a> while aggregate statistics in the JSON files are directly shown on the page.
+      <h3>I love being outdoor walking, running and biking. To track my activities, I have been using
+        Strava since 2022 and before that I was using Nike Run Club app. However, free subscription to
+        these kind of apps do not provide creative visualizations. Instead of paying for subscription,
+        I have written a compact <a href="https://github.com/Avcu/GPX-data-pipeline"> data pipeline in Python</a>
+        that processes GPX and FIT (this is how fitness/tracking apps store your actitivies) files,
+        creates KML files with geo-location information and JSON files with aggregate statistics by city.
+        These are then uploaded to AWS S3 by the data pipeline. <br><br>
+
+        On this page, KML and JSON files are fetched from S3. Then, based on the selected city corresponding
+        KML file is provided to <a href="https://developers.google.com/maps/documentation/javascript/overview">Maps
+          Javascript API</a> while aggregate statistics in the JSON files are directly shown on the page.
       </h3>
     </div>
     <br><br>
@@ -27,7 +28,7 @@
 
   <div class="content_run">
     <br>
-    <h1 style="text-align:center;">Running</h1>
+    <h1 style="text-align:center;">Walking/Running</h1>
     <br>
     <div class="flex-container">
       <div class="flex-child" id="map_run"></div>
@@ -40,6 +41,34 @@
             <option value="Seattle, WA">Seattle, WA</option>
             <option value="Toronto, ON">Toronto, ON</option>
           </select>
+        </div>
+        <div class="stats-container">
+          <div class="stats-section">
+            <h3 id="run_city_name">New York, NY</h3>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span class="stat-label">Activities</span>
+                <span class="stat-value" id="run_city_activities">0</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Distance</span>
+                <span class="stat-value" id="run_city_distance">0.0 km</span>
+              </div>
+            </div>
+          </div>
+          <div class="stats-section">
+            <h3>Grand Total</h3>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span class="stat-label">Activities</span>
+                <span class="stat-value" id="run_total_activities">0</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Distance</span>
+                <span class="stat-value" id="run_total_distance">0.0 km</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -61,6 +90,34 @@
             <option value="Seattle, WA">Seattle, WA</option>
             <option value="Toronto, ON">Toronto, ON</option>
           </select>
+        </div>
+        <div class="stats-container">
+          <div class="stats-section">
+            <h3 id="bike_city_name">Los Angeles, CA</h3>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span class="stat-label">Activities</span>
+                <span class="stat-value" id="bike_city_activities">0</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Distance</span>
+                <span class="stat-value" id="bike_city_distance">0.0 km</span>
+              </div>
+            </div>
+          </div>
+          <div class="stats-section">
+            <h3>Grand Total</h3>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span class="stat-label">Activities</span>
+                <span class="stat-value" id="bike_total_activities">0</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Distance</span>
+                <span class="stat-value" id="bike_total_distance">0.0 km</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

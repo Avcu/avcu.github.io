@@ -12,24 +12,21 @@ const locations = {
   "New York, NY": { lat: 40.72544, lng: -73.99678 }
 };
 
-// TODO: Implement dynamic mapping that would eliminate this hard-coded values below
-const running_kml_paths = {
-  "Los Angeles, CA": "https://avcu.github.io/tracks/data/kml_files/tracks_run_los_angeles.kml",
-  "Seattle, WA": "https://avcu.github.io/tracks/data/kml_files/tracks_run_seattle.kml",
-  "Toronto, ON": "https://avcu.github.io/tracks/data/kml_files/tracks_run_toronto.kml",
-  "New York, NY": "https://avcu.github.io/tracks/data/kml_files/tracks_run_new_york.kml"
+const city_slugs = {
+  "Los Angeles, CA": "los_angeles",
+  "Seattle, WA": "seattle",
+  "Toronto, ON": "toronto",
+  "New York, NY": "new_york"
+};
+
+const S3_TRACKS_BASE_URL = "https://s3.us-east-1.amazonaws.com/avcu.github.io/tracks";
+
+function kmlPath(activity, city) {
+  return `${S3_TRACKS_BASE_URL}/kml_files/tracks_${activity}_${city_slugs[city]}.kml`;
 }
 
-// TODO: Implement dynamic mapping that would eliminate this hard-coded values below
-const biking_kml_paths = {
-  "Los Angeles, CA": "https://avcu.github.io/tracks/data/kml_files/tracks_bike_los_angeles.kml",
-  "Seattle, WA": "https://avcu.github.io/tracks/data/kml_files/tracks_bike_seattle.kml",
-  "Toronto, ON": "https://avcu.github.io/tracks/data/kml_files/tracks_bike_toronto.kml",
-  "New York, NY": "https://avcu.github.io/tracks/data/kml_files/tracks_bike_new_york.kml"
-}
-
-let running_stats = "./data/json_files/running_stats.json";
-let biking_stats = "./data/json_files/biking_stats.json";
+let running_stats = `${S3_TRACKS_BASE_URL}/json_files/running_stats.json`;
+let biking_stats = `${S3_TRACKS_BASE_URL}/json_files/biking_stats.json`;
 
 let runningStatsData = null;
 let bikingStatsData = null;
@@ -41,7 +38,7 @@ function initMap() {
     disableDefaultUI: true,
   });
   runKmlLayer = new google.maps.KmlLayer({
-    url: running_kml_paths["New York, NY"] + "?v=" + Date.now(),
+    url: kmlPath("run", "New York, NY") + "?v=" + Date.now(),
     preserveViewport: true,
     map: runMap,
   });
@@ -52,7 +49,7 @@ function initMap() {
     disableDefaultUI: true,
   });
   bikeKmlLayer = new google.maps.KmlLayer({
-    url: biking_kml_paths["Los Angeles, CA"] + "?v=" + Date.now(),
+    url: kmlPath("bike", "Los Angeles, CA") + "?v=" + Date.now(),
     preserveViewport: true,
     map: bikeMap,
   });
@@ -74,12 +71,12 @@ function setupCitySelectors() {
         runKmlLayer.setMap(null); // remove old layer
       }
       runKmlLayer = new google.maps.KmlLayer({
-        url: running_kml_paths[city] + "?v=" + Date.now(),
+        url: kmlPath("run", city) + "?v=" + Date.now(),
         preserveViewport: true,
         map: runMap,
       });
       if (runningStatsData) {
-        renderRunningData(runningStatsData, city);
+        renderStatsData(runningStatsData, city, "run");
       }
     });
   }
@@ -96,12 +93,12 @@ function setupCitySelectors() {
         bikeKmlLayer.setMap(null); // remove old layer
       }
       bikeKmlLayer = new google.maps.KmlLayer({
-        url: biking_kml_paths[city] + "?v=" + Date.now(),
+        url: kmlPath("bike", city) + "?v=" + Date.now(),
         preserveViewport: true,
         map: bikeMap,
       });
       if (bikingStatsData) {
-        renderBikingData(bikingStatsData, city);
+        renderStatsData(bikingStatsData, city, "bike");
       }
     });
   }
@@ -110,103 +107,23 @@ function setupCitySelectors() {
 async function fetchRunningData() {
   const runningStatsResponse = await fetch(running_stats);
   runningStatsData = await runningStatsResponse.json();
-  renderRunningData(runningStatsData, "New York, NY");
+  renderStatsData(runningStatsData, "New York, NY", "run");
 }
 
 async function fetchBikingData() {
   const bikingStatsResponse = await fetch(biking_stats);
   bikingStatsData = await bikingStatsResponse.json();
-  renderBikingData(bikingStatsData, "Los Angeles, CA");
+  renderStatsData(bikingStatsData, "Los Angeles, CA", "bike");
 }
 
-function renderRunningData(content, selectedCity) {
-  const divStatRun = document.getElementById("stat_run");
-
-  let displayDiv = document.getElementById("running_stats_display");
-  if (!displayDiv) {
-    displayDiv = document.createElement('div');
-    displayDiv.id = "running_stats_display";
-    divStatRun.appendChild(displayDiv);
-  }
-
+function renderStatsData(content, selectedCity, idPrefix) {
   const cityData = content.cities[selectedCity] || { num_track: 0, tot_distance_km: 0 };
 
-  displayDiv.innerHTML = `
-    <div class="stats-container">
-      <div class="stats-section">
-        <h3>${selectedCity}</h3>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span class="stat-label">Activities</span>
-            <span class="stat-value">${cityData.num_track}</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Distance</span>
-            <span class="stat-value">${cityData.tot_distance_km.toFixed(1)} km</span>
-          </div>
-        </div>
-      </div>
-      
-      <div class="stats-section">
-        <h3>Grand Total</h3>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span class="stat-label">Activities</span>
-            <span class="stat-value">${content.num_track}</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Distance</span>
-            <span class="stat-value">${content.tot_distance_km.toFixed(1)} km</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function renderBikingData(content, selectedCity) {
-  const divStatBike = document.getElementById("stat_bike");
-
-  let displayDiv = document.getElementById("biking_stats_display");
-  if (!displayDiv) {
-    displayDiv = document.createElement('div');
-    displayDiv.id = "biking_stats_display";
-    divStatBike.appendChild(displayDiv);
-  }
-
-  const cityData = content.cities[selectedCity] || { num_track: 0, tot_distance_km: 0 };
-
-  displayDiv.innerHTML = `
-    <div class="stats-container">
-      <div class="stats-section">
-        <h3>${selectedCity}</h3>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span class="stat-label">Activities</span>
-            <span class="stat-value">${cityData.num_track}</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Distance</span>
-            <span class="stat-value">${cityData.tot_distance_km.toFixed(1)} km</span>
-          </div>
-        </div>
-      </div>
-      
-      <div class="stats-section">
-        <h3>Grand Total</h3>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span class="stat-label">Activities</span>
-            <span class="stat-value">${content.num_track}</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Distance</span>
-            <span class="stat-value">${content.tot_distance_km.toFixed(1)} km</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
+  document.getElementById(`${idPrefix}_city_name`).textContent = selectedCity;
+  document.getElementById(`${idPrefix}_city_activities`).textContent = cityData.num_track;
+  document.getElementById(`${idPrefix}_city_distance`).textContent = `${cityData.tot_distance_km.toFixed(1)} km`;
+  document.getElementById(`${idPrefix}_total_activities`).textContent = content.num_track;
+  document.getElementById(`${idPrefix}_total_distance`).textContent = `${content.tot_distance_km.toFixed(1)} km`;
 }
 
 fetchRunningData();
