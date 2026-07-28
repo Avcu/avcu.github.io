@@ -11,20 +11,33 @@ body {
 }
 
 .intro {
-  background-image: url("assets/runningImage.jpg");
-  height: 800px;
+  background-image: url("assets/greenlake.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 1000px;
   position: relative;
 }
 
 .intro_text {
   position: absolute;
-  width: 60%;
+  width: 70%;
   bottom: 50px;
   right: 50px;
 }
 
 .intro_text h3 {
   color: #FFFFFF;
+}
+
+.image_caption {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .intro_text a,
