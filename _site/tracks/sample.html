@@ -9,15 +9,15 @@
 <body>
   <div class="intro">
     <div class="intro_text">
-      <h3>I love being outdoor walking, running and biking. To track my activities, I have been using
-        Strava since 2022 and before that I was using Nike Run Club app. However, free subscription to
+      <h3>I love being outdoor, walking, running and biking. To track my activities, I have been using
+        Strava since 2022 and before that I was using Nike Run Club. However, free subscription to
         these kind of apps do not provide creative visualizations. Instead of paying for subscription,
         I have written a compact <a href="https://github.com/Avcu/GPX-data-pipeline"> data pipeline in Python</a>
         that processes GPX and FIT (this is how fitness/tracking apps store your actitivies) files,
-        creates KML files with geo-location information and JSON files with aggregate statistics by city.
-        These are then uploaded to AWS S3 by the data pipeline. <br><br>
+        creates KML files with geolocation information and JSON files with aggregate statistics by city.
+        These artifacts are then uploaded to AWS S3 by the data pipeline. <br><br>
 
-        On this page, KML and JSON files are fetched from S3. Then, based on the selected city corresponding
+        On this page, KML and JSON files are fetched from AWS S3. Then, based on the selected city, corresponding
         KML file is provided to <a href="https://developers.google.com/maps/documentation/javascript/overview">Maps
           Javascript API</a> while aggregate statistics in the JSON files are directly shown on the page.
       </h3>
