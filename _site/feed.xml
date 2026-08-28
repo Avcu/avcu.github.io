@@ -1,4 +1,125 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-07-28T17:24:07+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Mustafa Talha Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Talha Avcu</name></author><entry><title type="html">Building GitHub Pages using Docker</title><link href="http://0.0.0.0:4000/programming/building-github-pages-using-docker/" rel="alternate" type="text/html" title="Building GitHub Pages using Docker" /><published>2022-01-21T00:00:00+00:00</published><updated>2022-01-21T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/building-github-pages-using-docker</id><content type="html" xml:base="http://0.0.0.0:4000/programming/building-github-pages-using-docker/"><![CDATA[<p>This website is built using Jekyll with Minimal Mistakes theme and hosted on
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-08-28T20:46:07+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Mustafa Talha Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Talha Avcu</name></author><entry><title type="html">Graph Algorithms and Data Structures</title><link href="http://0.0.0.0:4000/programming/graph-algorithms/" rel="alternate" type="text/html" title="Graph Algorithms and Data Structures" /><published>2026-08-28T00:00:00+00:00</published><updated>2026-08-28T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/graph-algorithms</id><content type="html" xml:base="http://0.0.0.0:4000/programming/graph-algorithms/"><![CDATA[<p>Here is the most frequently used graph algorithms and data structures. This page will
+not go into the details of other data structures that are used for example: stacks, queues,
+hash maps etc. and will keep the focus on the graph techniques.</p>
+
+<h2 id="detecting-cycles">Detecting Cycles</h2>
+
+<h3 id="directed-graph">Directed Graph</h3>
+
+<p>Use <code class="language-plaintext highlighter-rouge">topological sort</code> as follows:</p>
+
+<p>First, prepare the following variables:</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">inDegree</code> (list): number of incoming edges for each vertex</li>
+  <li><code class="language-plaintext highlighter-rouge">adj</code> (list of list): adjacency matrix</li>
+</ol>
+
+<p>Then, do the following operations:</p>
+<ol>
+  <li>Add the vertex whose <code class="language-plaintext highlighter-rouge">inDegree</code> is zero to a queue</li>
+  <li>Pop from the queue in a while loop
+    <ul>
+      <li>Update the <code class="language-plaintext highlighter-rouge">inDegree</code> for the neighbor vertex</li>
+      <li>Add the new vertex whose <code class="language-plaintext highlighter-rouge">inDegree</code> becomes zero to the queue</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code></p>
+
+<p>Sample Problem: <a href="https://neetcode.io/problems/course-schedule">course-schedule</a></p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">canFinish</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">numCourses</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">prerequisites</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">numberOfPrereq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">numCourses</span><span class="p">)]</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">numCourses</span><span class="p">)]</span>
+        
+        <span class="k">for</span> <span class="n">prereqs</span> <span class="ow">in</span> <span class="n">prerequisites</span><span class="p">:</span>
+            <span class="n">course</span><span class="p">,</span> <span class="n">pre</span> <span class="o">=</span> <span class="n">prereqs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">prereqs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># number of required courses
+</span>            <span class="n">numberOfPrereq</span><span class="p">[</span><span class="n">course</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># list of next courses that require this course
+</span>            <span class="n">adj</span><span class="p">[</span><span class="n">pre</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">course</span><span class="p">)</span>
+
+        <span class="n">q</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">numberOfPrereq</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">numberOfPrereq</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+                <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">currCourse</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">nextCourse</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">currCourse</span><span class="p">]:</span>
+                <span class="n">numberOfPrereq</span><span class="p">[</span><span class="n">nextCourse</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">numberOfPrereq</span><span class="p">[</span><span class="n">nextCourse</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">nextCourse</span><span class="p">)</span>
+                    <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">nextCourse</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">==</span> <span class="n">numCourses</span>
+
+</code></pre></div></div>
+
+<h3 id="undirected-graph">Undirected Graph</h3>
+
+<p>First, prepare the following variables:</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">adj</code> (list of list): adjacency matrix
+    <ul>
+      <li>add both directions [i][j] and [j][i] for a single edge</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">seen</code> (set): to store the discovered vertex</li>
+</ol>
+
+<p>Then, do the following operations:</p>
+<ol>
+  <li>Add [0, -1] to a queue, format is going to be (node, parent)</li>
+  <li>Pop from the queue in a while loop
+    <ul>
+      <li>If there is a neighbor that is seen before return <code class="language-plaintext highlighter-rouge">True</code>, that’s a cycle</li>
+      <li>If neighbor is the parent, skip</li>
+      <li>Otherwise, add the neighbor to the queue and seen set</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code></p>
+
+<p>Sample Problem: <a href="https://neetcode.io/problems/valid-tree">valid-tree</a></p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">validTree</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">seen</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+        <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">child</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">nei</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">child</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">nei</span> <span class="o">==</span> <span class="n">parent</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">nei</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+                <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">nei</span><span class="p">,</span> <span class="n">child</span><span class="p">])</span>
+                <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">nei</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span>
+</code></pre></div></div>]]></content><author><name>Mustafa Talha Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[Here is the most frequently used graph algorithms and data structures. This page will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.]]></summary></entry><entry><title type="html">Building GitHub Pages using Docker</title><link href="http://0.0.0.0:4000/programming/building-github-pages-using-docker/" rel="alternate" type="text/html" title="Building GitHub Pages using Docker" /><published>2022-01-21T00:00:00+00:00</published><updated>2022-01-21T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/building-github-pages-using-docker</id><content type="html" xml:base="http://0.0.0.0:4000/programming/building-github-pages-using-docker/"><![CDATA[<p>This website is built using Jekyll with Minimal Mistakes theme and hosted on
 GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll.
 Ruby is a programming language, RubyGems is a package manager for Ruby just like
 pip for Python and finally Jekyll is a gem that converts markdowns to html codes. 
@@ -59,7 +180,7 @@ CMD ["jekyll", "serve"]
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t minimal-mistakes .
 docker run --volume="${PWD}:/usr/src/app" -p 4000:4000 -t minimal-mistakes
-</code></pre></div></div>]]></content><author><name>Mustafa Talha Avcu</name></author><category term="Programming" /><category term="Github" /><category term="Docker" /><summary type="html"><![CDATA[This website is built using Jekyll with Minimal Mistakes theme and hosted on GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll. Ruby is a programming language, RubyGems is a package manager for Ruby just like pip for Python and finally Jekyll is a gem that converts markdowns to html codes. Here, we will see how we can use docker to handle all these in an easy and clear way. Step 1: Create a container with Ruby Once a Github Page Theme is forked and cloned locally, we need to create a container with Ruby. Create a file called Dockerfile with the following content FROM ruby:3.0 WORKDIR /usr/src/app # we put README.md as placeholder, because Docker cannot create empty container COPY README.md ./ #create volume for later mounting of your local directory VOLUME /usr/src/app And then, build a container docker build -t my-ruby-env . Step 2: Generate Gemfile.lock Generate a Gemfile.lock for minimal-mistakes theme docker run --volume="${PWD}:/usr/src/app" -it my-ruby-env bundle install Step 3: Create a container for the website to run locally Make sure that port and host are defined in the _config.yml, and modify the Dockerfile as follows FROM ruby:3.0 RUN bundle config --global frozen 1 WORKDIR /usr/src/app # prepare to install ruby packages into container COPY Gemfile Gemfile.lock minimal-mistakes-jekyll.gemspec ./ RUN bundle install VOLUME /usr/src/app EXPOSE 4000 CMD ["jekyll", "serve"] Finally, run the following commands to build the container and run it. docker build -t minimal-mistakes . docker run --volume="${PWD}:/usr/src/app" -p 4000:4000 -t minimal-mistakes]]></summary></entry><entry><title type="html">Writing on Github</title><link href="http://0.0.0.0:4000/programming/writing-on-github/" rel="alternate" type="text/html" title="Writing on Github" /><published>2019-07-01T00:00:00+00:00</published><updated>2019-07-01T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/writing-on-github</id><content type="html" xml:base="http://0.0.0.0:4000/programming/writing-on-github/"><![CDATA[<p>It’s a template post presenting different writing styles/features that can be used in github repositories and pages.
+</code></pre></div></div>]]></content><author><name>Mustafa Talha Avcu</name></author><category term="Programming" /><category term="Github" /><category term="Docker" /><summary type="html"><![CDATA[This website is built using Jekyll with Minimal Mistakes theme and hosted on GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll. Ruby is a programming language, RubyGems is a package manager for Ruby just like pip for Python and finally Jekyll is a gem that converts markdowns to html codes. Here, we will see how we can use docker to handle all these in an easy and clear way.]]></summary></entry><entry><title type="html">Writing on Github</title><link href="http://0.0.0.0:4000/programming/writing-on-github/" rel="alternate" type="text/html" title="Writing on Github" /><published>2019-07-01T00:00:00+00:00</published><updated>2019-07-01T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/writing-on-github</id><content type="html" xml:base="http://0.0.0.0:4000/programming/writing-on-github/"><![CDATA[<p>It’s a template post presenting different writing styles/features that can be used in github repositories and pages.
 Most of the examples are from <a href="https://help.github.com/en/articles/basic-writing-and-formatting-syntax">Github - Basic Writing and Formatting Syntax</a></p>
 
 <h1 id="headings">Headings</h1>
@@ -170,4 +291,4 @@ git commit
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Let's rename \*our-new-project\* to \*our-old-project\*.
 </code></pre></div></div>
 
-<p>Let’s rename *our-new-project* to *our-old-project*.</p>]]></content><author><name>Mustafa Talha Avcu</name></author><category term="Programming" /><category term="Github" /><category term="ReadMe" /><summary type="html"><![CDATA[It’s a template post presenting different writing styles/features that can be used in github repositories and pages. Most of the examples are from Github - Basic Writing and Formatting Syntax Headings ## The second largest heading ###### The smallest heading The second largest heading The smallest heading Styling Text **Bold** *Italic* ~~Strikethrough~~ Bold Italic Strikethrough Quoting Code The text within the backticks will not be formatted. Use git status to list all new or modified files that haven’t yet been committed. To format code or text into its own distinct block, use triple backticks. git status git add git commit Let’s put a python code here. import datetime print("Current time is:", datetime.datetime.now()) Let’s also show the output of the code above. Current time is: 2019-07-03 16:05:48.051145 Lists - George Washington - John Adams - Thomas Jefferson George Washington John Adams Thomas Jefferson 1. George Washington 2. John Adams 3. Thomas Jefferson George Washington John Adams Thomas Jefferson Nested Lists 1. First list item - First nested list item - Second nested list item First list item First nested list item Second nested list item Task Lists - [x] Finish my changes - [ ] Push my commits to GitHub - [ ] Open a pull request Finish my changes Push my commits to GitHub Open a pull request Emoji :+1: :smile: :punch: :satisfied: :clap: :+1: :smile: :punch: :satisfied: :clap: Ignoring Markdown Formatting You can tell GitHub to ignore (or escape) Markdown formatting by using \ before the Markdown character. Let's rename \*our-new-project\* to \*our-old-project\*. Let’s rename *our-new-project* to *our-old-project*.]]></summary></entry></feed>
+<p>Let’s rename *our-new-project* to *our-old-project*.</p>]]></content><author><name>Mustafa Talha Avcu</name></author><category term="Programming" /><category term="Github" /><category term="ReadMe" /><summary type="html"><![CDATA[It’s a template post presenting different writing styles/features that can be used in github repositories and pages. Most of the examples are from Github - Basic Writing and Formatting Syntax]]></summary></entry></feed>

@@ -15,18 +15,18 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 1000px;
+  height: 800px;
   position: relative;
 }
 
 .intro_text {
   position: absolute;
-  width: 70%;
+  width: 65%;
   bottom: 50px;
   right: 50px;
 }
 
-.intro_text h3 {
+.intro_text h4 {
   color: #FFFFFF;
 }
 

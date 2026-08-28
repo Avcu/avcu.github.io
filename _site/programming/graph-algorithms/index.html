@@ -1,0 +1,657 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Graph Algorithms and Data Structures -</title>
+<meta name="description" content="Here is the most frequently used graph algorithms and data structures. This page will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
+
+
+  <meta name="author" content="Mustafa Talha Avcu">
+  
+  <meta property="article:author" content="Mustafa Talha Avcu">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="Graph Algorithms and Data Structures">
+<meta property="og:url" content="http://0.0.0.0:4000/programming/graph-algorithms/">
+
+
+  <meta property="og:description" content="Here is the most frequently used graph algorithms and data structures. This page will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-28T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/programming/graph-algorithms/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Mustafa Talha Avcu",
+      "url": "http://0.0.0.0:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/resume/">Resume</a>
+            </li><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/publications/">Publications</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://0.0.0.0:4000/">
+        <img src="/assets/images/profile_picture.jpg" alt="Mustafa Talha Avcu" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://0.0.0.0:4000/" itemprop="url">Mustafa Talha Avcu</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Software Engineer based in New York City. M.S. in Computer Science at USC.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">New York, NY</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:itsavcu@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://twitter.com/mtavcu" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/avcu" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Graph Algorithms and Data Structures">
+    <meta itemprop="description" content="Here is the most frequently used graph algorithms and data structures. This page willnot go into the details of other data structures that are used for example: stacks, queues,hash maps etc. and will keep the focus on the graph techniques.">
+    <meta itemprop="datePublished" content="2026-08-28T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://0.0.0.0:4000/programming/graph-algorithms/" class="u-url" itemprop="url">Graph Algorithms and Data Structures
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Here is the most frequently used graph algorithms and data structures. This page will
+not go into the details of other data structures that are used for example: stacks, queues,
+hash maps etc. and will keep the focus on the graph techniques.</p>
+
+<h2 id="detecting-cycles">Detecting Cycles</h2>
+
+<h3 id="directed-graph">Directed Graph</h3>
+
+<p>Use <code class="language-plaintext highlighter-rouge">topological sort</code> as follows:</p>
+
+<p>First, prepare the following variables:</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">inDegree</code> (list): number of incoming edges for each vertex</li>
+  <li><code class="language-plaintext highlighter-rouge">adj</code> (list of list): adjacency matrix</li>
+</ol>
+
+<p>Then, do the following operations:</p>
+<ol>
+  <li>Add the vertex whose <code class="language-plaintext highlighter-rouge">inDegree</code> is zero to a queue</li>
+  <li>Pop from the queue in a while loop
+    <ul>
+      <li>Update the <code class="language-plaintext highlighter-rouge">inDegree</code> for the neighbor vertex</li>
+      <li>Add the new vertex whose <code class="language-plaintext highlighter-rouge">inDegree</code> becomes zero to the queue</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code></p>
+
+<p>Sample Problem: <a href="https://neetcode.io/problems/course-schedule">course-schedule</a></p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">canFinish</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">numCourses</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">prerequisites</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">numberOfPrereq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">numCourses</span><span class="p">)]</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">numCourses</span><span class="p">)]</span>
+        
+        <span class="k">for</span> <span class="n">prereqs</span> <span class="ow">in</span> <span class="n">prerequisites</span><span class="p">:</span>
+            <span class="n">course</span><span class="p">,</span> <span class="n">pre</span> <span class="o">=</span> <span class="n">prereqs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">prereqs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># number of required courses
+</span>            <span class="n">numberOfPrereq</span><span class="p">[</span><span class="n">course</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># list of next courses that require this course
+</span>            <span class="n">adj</span><span class="p">[</span><span class="n">pre</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">course</span><span class="p">)</span>
+
+        <span class="n">q</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">numberOfPrereq</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">numberOfPrereq</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+                <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">currCourse</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">nextCourse</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">currCourse</span><span class="p">]:</span>
+                <span class="n">numberOfPrereq</span><span class="p">[</span><span class="n">nextCourse</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">numberOfPrereq</span><span class="p">[</span><span class="n">nextCourse</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">nextCourse</span><span class="p">)</span>
+                    <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">nextCourse</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">==</span> <span class="n">numCourses</span>
+
+</code></pre></div></div>
+
+<h3 id="undirected-graph">Undirected Graph</h3>
+
+<p>First, prepare the following variables:</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">adj</code> (list of list): adjacency matrix
+    <ul>
+      <li>add both directions [i][j] and [j][i] for a single edge</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">seen</code> (set): to store the discovered vertex</li>
+</ol>
+
+<p>Then, do the following operations:</p>
+<ol>
+  <li>Add [0, -1] to a queue, format is going to be (node, parent)</li>
+  <li>Pop from the queue in a while loop
+    <ul>
+      <li>If there is a neighbor that is seen before return <code class="language-plaintext highlighter-rouge">True</code>, that’s a cycle</li>
+      <li>If neighbor is the parent, skip</li>
+      <li>Otherwise, add the neighbor to the queue and seen set</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code></p>
+
+<p>Sample Problem: <a href="https://neetcode.io/problems/valid-tree">valid-tree</a></p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">validTree</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">seen</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+        <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">child</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">nei</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">child</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">nei</span> <span class="o">==</span> <span class="n">parent</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">nei</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+                <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">nei</span><span class="p">,</span> <span class="n">child</span><span class="p">])</span>
+                <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">nei</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#algorithm" class="page__taxonomy-item p-category" rel="tag">Algorithm</a><span class="sep">, </span>
+    
+      <a href="/tags/#data-structure" class="page__taxonomy-item p-category" rel="tag">Data Structure</a><span class="sep">, </span>
+    
+      <a href="/tags/#graph" class="page__taxonomy-item p-category" rel="tag">Graph</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#programming" class="page__taxonomy-item p-category" rel="tag">Programming</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-28T00:00:00+00:00">August 28, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Graph+Algorithms+and+Data+Structures%20http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Fgraph-algorithms%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Fgraph-algorithms%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Fgraph-algorithms%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/programming/building-github-pages-using-docker/" class="pagination--pager" title="Building GitHub Pages using Docker
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/programming/building-github-pages-using-docker/" rel="permalink">Building GitHub Pages using Docker
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">This website is built using Jekyll with Minimal Mistakes theme and hosted on
+GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll.
+R...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/programming/writing-on-github/" rel="permalink">Writing on Github
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">It’s a template post presenting different writing styles/features that can be used in github repositories and pages.
+Most of the examples are from Github - B...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Mustafa Talha Avcu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

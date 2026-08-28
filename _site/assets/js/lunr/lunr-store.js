@@ -10,4 +10,10 @@ var store = [{
         "tags": ["Github","Docker"],
         "url": "/programming/building-github-pages-using-docker/",
         "teaser": null
+      },{
+        "title": "Graph Algorithms and Data Structures",
+        "excerpt":"Here is the most frequently used graph algorithms and data structures. This page will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques. Detecting Cycles Directed Graph Use topological sort as...","categories": ["Programming"],
+        "tags": ["Graph","Data Structure","Algorithm"],
+        "url": "/programming/graph-algorithms/",
+        "teaser": null
       }]
