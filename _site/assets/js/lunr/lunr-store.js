@@ -11,9 +11,15 @@ var store = [{
         "url": "/programming/building-github-pages-using-docker/",
         "teaser": null
       },{
-        "title": "Graph Algorithms and Data Structures",
-        "excerpt":"Here is the most frequently used graph algorithms and data structures. This page will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques. Detecting Cycles Directed Graph Use topological sort as...","categories": ["Programming"],
+        "title": "Basic Graph Algorithms",
+        "excerpt":"Here is the most frequently used graph algorithms and data structures. This page will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques. Traversing Graphs - Find cycle in undirected graph...","categories": ["Programming"],
         "tags": ["Graph","Data Structure","Algorithm"],
-        "url": "/programming/graph-algorithms/",
+        "url": "/programming/basic-graph-algo/",
+        "teaser": null
+      },{
+        "title": "Topological Sort",
+        "excerpt":"Here is the most frequently used graph algorithms and data structures. This page will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques. Topological Sort Topological Sort: linear ordering of vertices...","categories": ["Programming"],
+        "tags": ["Graph","Data Structure","Algorithm"],
+        "url": "/programming/topological-sort/",
         "teaser": null
       }]
