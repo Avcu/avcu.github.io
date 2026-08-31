@@ -10,6 +10,8 @@ main:
     url: /blog/
   - title: "Publications"
     url: /publications/
+  - title: "Misc"
+    url: /tracks/sample.html
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"

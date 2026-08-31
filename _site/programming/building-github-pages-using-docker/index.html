@@ -13,9 +13,9 @@
 <meta name="description" content="This website is built using Jekyll with Minimal Mistakes theme and hosted on GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll. Ruby is a programming language, RubyGems is a package manager for Ruby just like pip for Python and finally Jekyll is a gem that converts markdowns to html codes.  Here, we will see how we can use docker to handle all these in an easy and clear way.  Step 1: Create a container with Ruby  Once a Github Page Theme is forked and cloned locally, we need to create a container with Ruby. Create a file called Dockerfile with the following content  FROM ruby:3.0  WORKDIR /usr/src/app  # we put README.md as placeholder, because Docker cannot create empty container COPY README.md ./  #create volume for later mounting of your local directory VOLUME /usr/src/app  And then, build a container  docker build -t my-ruby-env .   Step 2: Generate Gemfile.lock  Generate a Gemfile.lock for minimal-mistakes theme  docker run --volume=&quot;${PWD}:/usr/src/app&quot; -it my-ruby-env bundle install   Step 3: Create a container for the website to run locally  Make sure that port and host are defined in the _config.yml, and modify the Dockerfile as follows  FROM ruby:3.0  RUN bundle config --global frozen 1  WORKDIR /usr/src/app  # prepare to install ruby packages into container COPY Gemfile Gemfile.lock minimal-mistakes-jekyll.gemspec ./  RUN bundle install  VOLUME /usr/src/app  EXPOSE 4000  CMD [&quot;jekyll&quot;, &quot;serve&quot;]   Finally, run the following commands to build the container and run it.  docker build -t minimal-mistakes . docker run --volume=&quot;${PWD}:/usr/src/app&quot; -p 4000:4000 -t minimal-mistakes">
 
 
-  <meta name="author" content="Mustafa Talha Avcu">
+  <meta name="author" content="Mustafa Avcu">
   
-  <meta property="article:author" content="Mustafa Talha Avcu">
+  <meta property="article:author" content="Mustafa Avcu">
   
 
 
@@ -55,7 +55,7 @@
     "@context": "https://schema.org",
     
       "@type": "Person",
-      "name": "Mustafa Talha Avcu",
+      "name": "Mustafa Avcu",
       "url": "http://0.0.0.0:4000/"
     
   }
@@ -128,6 +128,8 @@
               <a href="/blog/">Blog</a>
             </li><li class="masthead__menu-item">
               <a href="/publications/">Publications</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tracks/sample.html">Misc</a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -157,14 +159,14 @@
   
     <div class="author__avatar">
       <a href="http://0.0.0.0:4000/">
-        <img src="/assets/images/profile_picture.jpg" alt="Mustafa Talha Avcu" itemprop="image" class="u-photo">
+        <img src="/assets/images/profile_picture.jpg" alt="Mustafa Avcu" itemprop="image" class="u-photo">
       </a>
     </div>
   
 
   <div class="author__content">
     <h3 class="author__name p-name" itemprop="name">
-      <a class="u-url" rel="me" href="http://0.0.0.0:4000/" itemprop="url">Mustafa Talha Avcu</a>
+      <a class="u-url" rel="me" href="http://0.0.0.0:4000/" itemprop="url">Mustafa Avcu</a>
     </h3>
     
       <div class="author__bio p-note" itemprop="description">
@@ -615,7 +617,7 @@ Most of the examples are from Github - B...</p>
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2026 Mustafa Talha Avcu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2026 Mustafa Avcu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

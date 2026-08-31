@@ -27,6 +27,7 @@ Then, do the following operations:
       * Otherwise, add the neighbor to the queue and seen set
 
 Runtime Complexity: `O(V + E)`
+Space Complexity: `O(V)`
 
 Sample Problem: [https://neetcode.io/problems/valid-tree](https://neetcode.io/problems/valid-tree)
 
