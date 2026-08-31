@@ -11,10 +11,10 @@ var store = [{
         "url": "/programming/building-github-pages-using-docker/",
         "teaser": null
       },{
-        "title": "Basic Graph Algorithms",
-        "excerpt":"Here is the most frequently used graph algorithms and data structures. This page will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques. Traversing Graphs - Find cycle in undirected graph...","categories": ["Programming"],
+        "title": "Traversing Graphs",
+        "excerpt":"There are two main ways to traverse a graph: Add vertices to stack or queue, and pop from the stack/queue and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS. Write a recursive method that takes vertex as an input and call...","categories": ["Programming"],
         "tags": ["Graph","Data Structure","Algorithm"],
-        "url": "/programming/basic-graph-algo/",
+        "url": "/programming/traversing-graphs/",
         "teaser": null
       },{
         "title": "Topological Sort",
