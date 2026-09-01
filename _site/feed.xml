@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-09-01T16:58:27+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Mustafa Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Avcu</name></author><entry><title type="html">Union-Find Algorithm</title><link href="http://0.0.0.0:4000/programming/union-find/" rel="alternate" type="text/html" title="Union-Find Algorithm" /><published>2026-09-01T00:00:00+00:00</published><updated>2026-09-01T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/union-find</id><content type="html" xml:base="http://0.0.0.0:4000/programming/union-find/"><![CDATA[<p>This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-09-01T18:27:08+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Mustafa Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Avcu</name></author><entry><title type="html">Union-Find Algorithm and Minimum Spanning Tree</title><link href="http://0.0.0.0:4000/programming/union-find/" rel="alternate" type="text/html" title="Union-Find Algorithm and Minimum Spanning Tree" /><published>2026-09-01T00:00:00+00:00</published><updated>2026-09-01T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/union-find</id><content type="html" xml:base="http://0.0.0.0:4000/programming/union-find/"><![CDATA[<p>This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.</p>
 
 <h2 id="union-find-algorithm">Union-Find Algorithm</h2>
 
@@ -73,6 +73,58 @@
         <span class="k">for</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nf">union</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">):</span>
                 <span class="k">return</span> <span class="p">[</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="minimum-spanning-tree-kruskals-algorithm">Minimum Spanning Tree (Kruskal’s Algorithm)</h2>
+
+<ol>
+  <li>Sort all edges in the graph in ascending order</li>
+  <li>Pick the smallest edge from the sorted list</li>
+  <li>Check for cycles, union-find fits perfectly here</li>
+  <li>Add the edge to the MST if it does not form a cycle</li>
+</ol>
+
+<p>Sample Problem: <a href="https://neetcode.io/problems/min-cost-to-connect-points">https://neetcode.io/problems/min-cost-to-connect-points</a></p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">minCostConnectPoints</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">points</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+        <span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+
+        <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">n</span>
+            <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="nf">find</span><span class="p">(</span><span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+        <span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">):</span>
+            <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="nf">find</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="nf">find</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">p1</span> <span class="o">==</span> <span class="n">p2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="n">rank</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">p2</span><span class="p">]:</span>
+                <span class="n">par</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">=</span> <span class="n">p1</span>
+            <span class="k">elif</span> <span class="n">rank</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">p1</span><span class="p">]:</span>
+                <span class="n">par</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">par</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span>
+                <span class="n">rank</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="n">currDist</span> <span class="o">=</span> <span class="nf">abs</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nf">abs</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">edges</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">currDist</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+        <span class="n">edges</span><span class="p">.</span><span class="nf">sort</span><span class="p">()</span>
+
+
+        <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">dist</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nf">union</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+                <span class="n">res</span> <span class="o">+=</span> <span class="n">dist</span>
+        <span class="k">return</span> <span class="n">res</span>
 </code></pre></div></div>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.]]></summary></entry><entry><title type="html">Topological Sort</title><link href="http://0.0.0.0:4000/programming/topological-sort/" rel="alternate" type="text/html" title="Topological Sort" /><published>2026-08-28T00:00:00+00:00</published><updated>2026-08-28T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/topological-sort</id><content type="html" xml:base="http://0.0.0.0:4000/programming/topological-sort/"><![CDATA[<p>This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.</p>
 
 <h2 id="topological-sort">Topological Sort</h2>

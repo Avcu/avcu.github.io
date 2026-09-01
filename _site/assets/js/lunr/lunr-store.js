@@ -23,7 +23,7 @@ var store = [{
         "url": "/programming/topological-sort/",
         "teaser": null
       },{
-        "title": "Union-Find Algorithm",
+        "title": "Union-Find Algorithm and Minimum Spanning Tree",
         "excerpt":"This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques. Union-Find Algorithm Union-Find: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets....","categories": ["Programming"],
         "tags": ["Graph","Data Structure","Algorithm"],
         "url": "/programming/union-find/",

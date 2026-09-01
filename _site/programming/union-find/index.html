@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Union-Find Algorithm -</title>
+<!-- begin _includes/seo.html --><title>Union-Find Algorithm and Minimum Spanning Tree -</title>
 <meta name="description" content="This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
 
 
@@ -22,7 +22,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="Union-Find Algorithm">
+<meta property="og:title" content="Union-Find Algorithm and Minimum Spanning Tree">
 <meta property="og:url" content="http://0.0.0.0:4000/programming/union-find/">
 
 
@@ -271,7 +271,7 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Union-Find Algorithm">
+    <meta itemprop="headline" content="Union-Find Algorithm and Minimum Spanning Tree">
     <meta itemprop="description" content="This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
     <meta itemprop="datePublished" content="2026-09-01T00:00:00+00:00">
     
@@ -280,7 +280,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://0.0.0.0:4000/programming/union-find/" class="u-url" itemprop="url">Union-Find Algorithm
+            <a href="http://0.0.0.0:4000/programming/union-find/" class="u-url" itemprop="url">Union-Find Algorithm and Minimum Spanning Tree
 </a>
           </h1>
           
@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          1 minute read
+          2 minute read
         
       </span>
     
@@ -386,6 +386,58 @@
                 <span class="k">return</span> <span class="p">[</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">]</span>
 </code></pre></div></div>
 
+<h2 id="minimum-spanning-tree-kruskals-algorithm">Minimum Spanning Tree (Kruskal’s Algorithm)</h2>
+
+<ol>
+  <li>Sort all edges in the graph in ascending order</li>
+  <li>Pick the smallest edge from the sorted list</li>
+  <li>Check for cycles, union-find fits perfectly here</li>
+  <li>Add the edge to the MST if it does not form a cycle</li>
+</ol>
+
+<p>Sample Problem: <a href="https://neetcode.io/problems/min-cost-to-connect-points">https://neetcode.io/problems/min-cost-to-connect-points</a></p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">minCostConnectPoints</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">points</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+        <span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+
+        <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">n</span>
+            <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="nf">find</span><span class="p">(</span><span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+        <span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">):</span>
+            <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="nf">find</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="nf">find</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">p1</span> <span class="o">==</span> <span class="n">p2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="n">rank</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">p2</span><span class="p">]:</span>
+                <span class="n">par</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">=</span> <span class="n">p1</span>
+            <span class="k">elif</span> <span class="n">rank</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">p1</span><span class="p">]:</span>
+                <span class="n">par</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">par</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span>
+                <span class="n">rank</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="n">currDist</span> <span class="o">=</span> <span class="nf">abs</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nf">abs</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">edges</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">currDist</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+        <span class="n">edges</span><span class="p">.</span><span class="nf">sort</span><span class="p">()</span>
+
+
+        <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">dist</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nf">union</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+                <span class="n">res</span> <span class="o">+=</span> <span class="n">dist</span>
+        <span class="k">return</span> <span class="n">res</span>
+</code></pre></div></div>
+
         
       </section>
 
@@ -439,7 +491,7 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Union-Find+Algorithm%20http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Funion-find%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Union-Find+Algorithm+and+Minimum+Spanning+Tree%20http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Funion-find%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Funion-find%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
