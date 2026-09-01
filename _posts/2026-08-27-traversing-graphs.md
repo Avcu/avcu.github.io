@@ -9,8 +9,8 @@ tags:
 ---
 
 There are two main ways to traverse a graph:
-  1. Add vertices to stack or queue, and pop from the stack/queue and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.
-  2. Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, we usually end up ending the parent vertex as a parameter to the method.
+  1. Add a vertex to stack/queue, and pop from it and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.
+  2. Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, recursive method usually take two inputs: child and parent, so that we can separate parent node while iterating over the neighbors.
 
 ### Find cycle in undirected graph
 
@@ -26,12 +26,14 @@ Then, do the following operations:
       * If neighbor is the parent, skip
       * Otherwise, add the neighbor to the queue and seen set
 
-Runtime Complexity: `O(V + E)`
-Space Complexity: `O(V)`
+Complexity Analysis:
+
+* Runtime Complexity: `O(V + E)`
+* Space Complexity: `O(V)`
 
 Sample Problem: [https://neetcode.io/problems/valid-tree](https://neetcode.io/problems/valid-tree)
 
-Code:
+Code (using Queue):
 ``` python
 from collections import deque
 
@@ -60,11 +62,41 @@ class Solution:
         return len(seen) == n
 ```
 
+Code (using recursive method):
+``` python
+from collections import deque
+
+class Solution:
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        adj = [[] for _ in range(n)]
+
+        for edge in edges:
+            adj[edge[0]].append(edge[1])
+            adj[edge[1]].append(edge[0])
+
+        seen = set()
+
+        def dfs(child, parent):
+            seen.add(child)
+
+            res = True
+            for nei in adj[child]:
+                if nei == parent:
+                    continue
+                if nei in seen:
+                    res = False
+                    break
+                res = res and dfs(nei, child)
+            return res
+
+        return dfs(0, -1) and len(seen) == n
+```
+
 ### Rotting fruit
 
 Problem: [https://neetcode.io/problems/rotting-fruit](https://neetcode.io/problems/rotting-fruit)
 
-Idea: Fresh fruits are getting rotten if there is a rotten neighbor in a minute. That's why, we used BFS and counted how many level we go in our search in order to count the number of minutes passed for all the fresh fruits to get rotten.
+Idea: Fresh fruits are getting rotten if there is a rotten neighbor in a minute. That's why, we used BFS and counted how many level we go in our search in order to count the number of minutes needed for all the fresh fruits to rot.
 
 Code:
 ``` python

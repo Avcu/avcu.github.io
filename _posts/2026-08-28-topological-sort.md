@@ -8,9 +8,7 @@ tags:
   - Algorithm
 ---
 
-Here is the most frequently used graph algorithms and data structures. This page will
-not go into the details of other data structures that are used for example: stacks, queues,
-hash maps etc. and will keep the focus on the graph techniques.
+This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.
 
 ## Topological Sort
 
@@ -25,15 +23,16 @@ First, prepare the following variables:
   2. `adj` (list of list): adjacency matrix
 
 Then, do the following operations:
-  1. Add the verteces whose `inDegree` is zero to a queue
+  1. Add the vertices whose `inDegree` is zero to a queue
   2. Pop from the queue in a while loop
       * Update the `inDegree` for the neighbor vertices
       * Add the new vertices whose `inDegree` becomes zero to the queue
 
-Runtime Complexity: `O(V + E)`
-Space Complexity: `O(V)`
+Complexity Analysis:
+* Runtime Complexity: `O(V + E)`
+* Space Complexity: `O(V)`
 
-Sample Problem: [https://leetcode.com/problems/course-schedule](https://leetcode.com/problems/course-schedule)
+Sample Problem: [https://neetcode.io/problems/course-schedule](https://neetcode.io/problems/course-schedule)
 
 Code:
 ``` python
@@ -79,7 +78,7 @@ Fundemental idea in topological sort which is processing vertices based on their
 Problem: [https://leetcode.com/problems/loud-and-rich](https://leetcode.com/problems/loud-and-rich)
 
 Idea: This solution has two additions to the cycle detection logic above
-  1. We would like to find the least quiet person in every subtree formed from each vertex, so we create a 1-d list to prepare this result
+  1. We would like to find the least quiet person in every subtree formed from each vertex, so we create a 1-d list to store this result
   2. To avoid redundant calculations, we switch to recursion and we skip the calculations for a subtree if it is already calculated before. This is similar to top-down dynamic programming where we use recursion and memoization.
 
 Code:
@@ -114,7 +113,7 @@ class Solution(object):
 ```
 #### Min Height Tree
 
-Problem: [https://leetcode.com/problems/minimum-height-trees](https://leetcode.com/problems/minimum-height-trees)
+Problem: [https://neetcode.io/problems/minimum-height-trees](https://neetcode.io/problems/minimum-height-trees)
 
 Idea: We would like to find the vertices which minimizes the height of the tree when they are selected as the root. This problem requires finding the longest path in the graph and then taking the median (middle vertex/vertices) in that path. A way to find these middle vertices is to get rid of leaf vertices step by step until we end up with one or two vertex.
 
@@ -156,9 +155,9 @@ class Solution:
             
 ```
 
+Straightforward solution is to find the longest path and then returns the middle vertices. Note that since this graph is undirected, we need to keep track of the parent vertex in our recursive method. Also, since we are starting from a random vertex, the first longest path we find may not actually be the longest path overall. So, we start another path search from the point we find in our first search.
 
-Code: Following solution first finds the longest path and then returns the middle vertices. Note that since this graph is undirected, we need to keep track of the parent vertex in our recursive method.
-
+Code: 
 ``` python
 class Solution:
     def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
@@ -189,5 +188,8 @@ class Solution:
             return [secondArr[lenArr//2]]
         return [secondArr[lenArr//2 -1], secondArr[lenArr//2]]
 ```
+
 ### References
-* Problem list: [https://leetcode.com/problem-list/topological-sort](https://leetcode.com/problem-list/topological-sort)
+* Topological Sort problem list:
+  * [https://neetcode.io/practice/problem-list/topological-sort](https://neetcode.io/practice/problem-list/topological-sort)
+  * [https://leetcode.com/problem-list/topological-sort](https://leetcode.com/problem-list/topological-sort)

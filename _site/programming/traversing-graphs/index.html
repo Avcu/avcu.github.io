@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Traversing Graphs -</title>
-<meta name="description" content="There are two main ways to traverse a graph:    Add vertices to stack or queue, and pop from the stack/queue and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.   Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, we usually end up ending the parent vertex as a parameter to the method.">
+<meta name="description" content="There are two main ways to traverse a graph:    Add a vertex to stack/queue, and pop from it and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.   Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, recursive method usually take two inputs: child and parent, so that we can separate parent node while iterating over the neighbors.">
 
 
   <meta name="author" content="Mustafa Avcu">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://0.0.0.0:4000/programming/traversing-graphs/">
 
 
-  <meta property="og:description" content="There are two main ways to traverse a graph:    Add vertices to stack or queue, and pop from the stack/queue and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.   Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, we usually end up ending the parent vertex as a parameter to the method.">
+  <meta property="og:description" content="There are two main ways to traverse a graph:    Add a vertex to stack/queue, and pop from it and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.   Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, recursive method usually take two inputs: child and parent, so that we can separate parent node while iterating over the neighbors.">
 
 
 
@@ -272,7 +272,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Traversing Graphs">
-    <meta itemprop="description" content="There are two main ways to traverse a graph:  Add vertices to stack or queue, and pop from the stack/queue and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.  Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, we usually end up ending the parent vertex as a parameter to the method.">
+    <meta itemprop="description" content="There are two main ways to traverse a graph:  Add a vertex to stack/queue, and pop from it and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.  Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, recursive method usually take two inputs: child and parent, so that we can separate parent node while iterating over the neighbors.">
     <meta itemprop="datePublished" content="2026-08-27T00:00:00+00:00">
     
 
@@ -311,8 +311,8 @@
         
         <p>There are two main ways to traverse a graph:</p>
 <ol>
-  <li>Add vertices to stack or queue, and pop from the stack/queue and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.</li>
-  <li>Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, we usually end up ending the parent vertex as a parameter to the method.</li>
+  <li>Add a vertex to stack/queue, and pop from it and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.</li>
+  <li>Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, recursive method usually take two inputs: child and parent, so that we can separate parent node while iterating over the neighbors.</li>
 </ol>
 
 <h3 id="find-cycle-in-undirected-graph">Find cycle in undirected graph</h3>
@@ -339,12 +339,16 @@
   </li>
 </ol>
 
-<p>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code>
-Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code></p>
+<p>Complexity Analysis:</p>
+
+<ul>
+  <li>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code></li>
+  <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code></li>
+</ul>
 
 <p>Sample Problem: <a href="https://neetcode.io/problems/valid-tree">https://neetcode.io/problems/valid-tree</a></p>
 
-<p>Code:</p>
+<p>Code (using Queue):</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
 
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
@@ -372,11 +376,40 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
         <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span>
 </code></pre></div></div>
 
+<p>Code (using recursive method):</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">validTree</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">seen</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+            <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">for</span> <span class="n">nei</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">child</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">nei</span> <span class="o">==</span> <span class="n">parent</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">nei</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="bp">False</span>
+                    <span class="k">break</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="ow">and</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">nei</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+
+        <span class="k">return</span> <span class="nf">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="nf">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span>
+</code></pre></div></div>
+
 <h3 id="rotting-fruit">Rotting fruit</h3>
 
 <p>Problem: <a href="https://neetcode.io/problems/rotting-fruit">https://neetcode.io/problems/rotting-fruit</a></p>
 
-<p>Idea: Fresh fruits are getting rotten if there is a rotten neighbor in a minute. That’s why, we used BFS and counted how many level we go in our search in order to count the number of minutes passed for all the fresh fruits to get rotten.</p>
+<p>Idea: Fresh fruits are getting rotten if there is a rotten neighbor in a minute. That’s why, we used BFS and counted how many level we go in our search in order to count the number of minutes needed for all the fresh fruits to rot.</p>
 
 <p>Code:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -505,6 +538,45 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/programming/union-find/" rel="permalink">Union-Find Algorithm
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the grap...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/programming/topological-sort/" rel="permalink">Topological Sort
 </a>
       
@@ -530,8 +602,7 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Here is the most frequently used graph algorithms and data structures. This page will
-not go into the details of other data structures that are used for exam...</p>
+    <p class="archive__item-excerpt" itemprop="description">This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the grap...</p>
   </article>
 </div>
 

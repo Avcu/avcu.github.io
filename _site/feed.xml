@@ -1,6 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-08-31T19:52:14+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Mustafa Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Avcu</name></author><entry><title type="html">Topological Sort</title><link href="http://0.0.0.0:4000/programming/topological-sort/" rel="alternate" type="text/html" title="Topological Sort" /><published>2026-08-28T00:00:00+00:00</published><updated>2026-08-28T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/topological-sort</id><content type="html" xml:base="http://0.0.0.0:4000/programming/topological-sort/"><![CDATA[<p>Here is the most frequently used graph algorithms and data structures. This page will
-not go into the details of other data structures that are used for example: stacks, queues,
-hash maps etc. and will keep the focus on the graph techniques.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-09-01T16:58:27+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Mustafa Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Avcu</name></author><entry><title type="html">Union-Find Algorithm</title><link href="http://0.0.0.0:4000/programming/union-find/" rel="alternate" type="text/html" title="Union-Find Algorithm" /><published>2026-09-01T00:00:00+00:00</published><updated>2026-09-01T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/union-find</id><content type="html" xml:base="http://0.0.0.0:4000/programming/union-find/"><![CDATA[<p>This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.</p>
+
+<h2 id="union-find-algorithm">Union-Find Algorithm</h2>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">Union-Find</code>: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets.</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># initially, parent for each vertex is itself
+</span><span class="n">parent</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="nf">range</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span>
+<span class="n">rank</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="nf">range</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span>
+
+<span class="c1"># find the parent recursively
+</span><span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">n</span>
+  <span class="c1"># path compression optimization
+</span>  <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="nf">find</span><span class="p">(</span><span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+  <span class="k">return</span> <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">):</span>
+  <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="nf">find</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="nf">find</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+  <span class="c1"># they are in the same set, return False
+</span>  <span class="k">if</span> <span class="n">p1</span> <span class="o">==</span> <span class="n">p2</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">False</span>
+  <span class="k">if</span> <span class="n">rank</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">p2</span><span class="p">]:</span>
+    <span class="n">par</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">=</span> <span class="n">p1</span>
+  <span class="k">elif</span> <span class="n">rank</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">p1</span><span class="p">]:</span>
+    <span class="n">par</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">par</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span>
+    <span class="n">rank</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="bp">True</span>
+
+</code></pre></div></div>
+
+<p>Complexity Analysis:</p>
+<ul>
+  <li>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(log(n)) -&gt; O(alpha(n))</code> with path compression optimization where alpha is the inverse ackermann function that never exceeds 4 for any value n in the physical universe.</li>
+  <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(n)</code></li>
+</ul>
+
+<h3 id="redundant-connection">Redundant Connection</h3>
+
+<p>Sample Problem: <a href="https://neetcode.io/problems/redundant-connection">https://neetcode.io/problems/redundant-connection</a></p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">findRedundantConnection</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="n">par</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">n</span>
+            <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="nf">find</span><span class="p">(</span><span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">par</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        
+        <span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">):</span>
+            <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="nf">find</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="nf">find</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">p1</span><span class="o">==</span><span class="n">p2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="n">rank</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">p2</span><span class="p">]:</span>
+                <span class="n">par</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">=</span> <span class="n">p1</span>
+            <span class="k">elif</span> <span class="n">rank</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">p1</span><span class="p">]:</span>
+                <span class="n">par</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">par</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">=</span> <span class="n">p1</span>
+                <span class="n">rank</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">for</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nf">union</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">]</span>
+</code></pre></div></div>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.]]></summary></entry><entry><title type="html">Topological Sort</title><link href="http://0.0.0.0:4000/programming/topological-sort/" rel="alternate" type="text/html" title="Topological Sort" /><published>2026-08-28T00:00:00+00:00</published><updated>2026-08-28T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/topological-sort</id><content type="html" xml:base="http://0.0.0.0:4000/programming/topological-sort/"><![CDATA[<p>This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.</p>
 
 <h2 id="topological-sort">Topological Sort</h2>
 
@@ -20,7 +93,7 @@ hash maps etc. and will keep the focus on the graph techniques.</p>
 
 <p>Then, do the following operations:</p>
 <ol>
-  <li>Add the verteces whose <code class="language-plaintext highlighter-rouge">inDegree</code> is zero to a queue</li>
+  <li>Add the vertices whose <code class="language-plaintext highlighter-rouge">inDegree</code> is zero to a queue</li>
   <li>Pop from the queue in a while loop
     <ul>
       <li>Update the <code class="language-plaintext highlighter-rouge">inDegree</code> for the neighbor vertices</li>
@@ -29,10 +102,13 @@ hash maps etc. and will keep the focus on the graph techniques.</p>
   </li>
 </ol>
 
-<p>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code>
-Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code></p>
+<p>Complexity Analysis:</p>
+<ul>
+  <li>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code></li>
+  <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code></li>
+</ul>
 
-<p>Sample Problem: <a href="https://leetcode.com/problems/course-schedule">https://leetcode.com/problems/course-schedule</a></p>
+<p>Sample Problem: <a href="https://neetcode.io/problems/course-schedule">https://neetcode.io/problems/course-schedule</a></p>
 
 <p>Code:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -78,7 +154,7 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
 
 <p>Idea: This solution has two additions to the cycle detection logic above</p>
 <ol>
-  <li>We would like to find the least quiet person in every subtree formed from each vertex, so we create a 1-d list to prepare this result</li>
+  <li>We would like to find the least quiet person in every subtree formed from each vertex, so we create a 1-d list to store this result</li>
   <li>To avoid redundant calculations, we switch to recursion and we skip the calculations for a subtree if it is already calculated before. This is similar to top-down dynamic programming where we use recursion and memoization.</li>
 </ol>
 
@@ -113,7 +189,7 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
 </code></pre></div></div>
 <h4 id="min-height-tree">Min Height Tree</h4>
 
-<p>Problem: <a href="https://leetcode.com/problems/minimum-height-trees">https://leetcode.com/problems/minimum-height-trees</a></p>
+<p>Problem: <a href="https://neetcode.io/problems/minimum-height-trees">https://neetcode.io/problems/minimum-height-trees</a></p>
 
 <p>Idea: We would like to find the vertices which minimizes the height of the tree when they are selected as the root. This problem requires finding the longest path in the graph and then taking the median (middle vertex/vertices) in that path. A way to find these middle vertices is to get rid of leaf vertices step by step until we end up with one or two vertex.</p>
 
@@ -154,8 +230,9 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
             
 </code></pre></div></div>
 
-<p>Code: Following solution first finds the longest path and then returns the middle vertices. Note that since this graph is undirected, we need to keep track of the parent vertex in our recursive method.</p>
+<p>Straightforward solution is to find the longest path and then returns the middle vertices. Note that since this graph is undirected, we need to keep track of the parent vertex in our recursive method. Also, since we are starting from a random vertex, the first longest path we find may not actually be the longest path overall. So, we start another path search from the point we find in our first search.</p>
 
+<p>Code:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">findMinHeightTrees</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
@@ -185,13 +262,19 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
             <span class="k">return</span> <span class="p">[</span><span class="n">secondArr</span><span class="p">[</span><span class="n">lenArr</span><span class="o">//</span><span class="mi">2</span><span class="p">]]</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">secondArr</span><span class="p">[</span><span class="n">lenArr</span><span class="o">//</span><span class="mi">2</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">secondArr</span><span class="p">[</span><span class="n">lenArr</span><span class="o">//</span><span class="mi">2</span><span class="p">]]</span>
 </code></pre></div></div>
+
 <h3 id="references">References</h3>
 <ul>
-  <li>Problem list: <a href="https://leetcode.com/problem-list/topological-sort">https://leetcode.com/problem-list/topological-sort</a></li>
-</ul>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[Here is the most frequently used graph algorithms and data structures. This page will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.]]></summary></entry><entry><title type="html">Traversing Graphs</title><link href="http://0.0.0.0:4000/programming/traversing-graphs/" rel="alternate" type="text/html" title="Traversing Graphs" /><published>2026-08-27T00:00:00+00:00</published><updated>2026-08-27T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/traversing-graphs</id><content type="html" xml:base="http://0.0.0.0:4000/programming/traversing-graphs/"><![CDATA[<p>There are two main ways to traverse a graph:</p>
+  <li>Topological Sort problem list:
+    <ul>
+      <li><a href="https://neetcode.io/practice/problem-list/topological-sort">https://neetcode.io/practice/problem-list/topological-sort</a></li>
+      <li><a href="https://leetcode.com/problem-list/topological-sort">https://leetcode.com/problem-list/topological-sort</a></li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.]]></summary></entry><entry><title type="html">Traversing Graphs</title><link href="http://0.0.0.0:4000/programming/traversing-graphs/" rel="alternate" type="text/html" title="Traversing Graphs" /><published>2026-08-27T00:00:00+00:00</published><updated>2026-08-27T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/traversing-graphs</id><content type="html" xml:base="http://0.0.0.0:4000/programming/traversing-graphs/"><![CDATA[<p>There are two main ways to traverse a graph:</p>
 <ol>
-  <li>Add vertices to stack or queue, and pop from the stack/queue and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.</li>
-  <li>Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, we usually end up ending the parent vertex as a parameter to the method.</li>
+  <li>Add a vertex to stack/queue, and pop from it and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.</li>
+  <li>Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, recursive method usually take two inputs: child and parent, so that we can separate parent node while iterating over the neighbors.</li>
 </ol>
 
 <h3 id="find-cycle-in-undirected-graph">Find cycle in undirected graph</h3>
@@ -218,12 +301,16 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
   </li>
 </ol>
 
-<p>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code>
-Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code></p>
+<p>Complexity Analysis:</p>
+
+<ul>
+  <li>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code></li>
+  <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code></li>
+</ul>
 
 <p>Sample Problem: <a href="https://neetcode.io/problems/valid-tree">https://neetcode.io/problems/valid-tree</a></p>
 
-<p>Code:</p>
+<p>Code (using Queue):</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
 
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
@@ -251,11 +338,40 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
         <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span>
 </code></pre></div></div>
 
+<p>Code (using recursive method):</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">validTree</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">seen</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+            <span class="n">seen</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">for</span> <span class="n">nei</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">child</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">nei</span> <span class="o">==</span> <span class="n">parent</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">nei</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="bp">False</span>
+                    <span class="k">break</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="ow">and</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">nei</span><span class="p">,</span> <span class="n">child</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+
+        <span class="k">return</span> <span class="nf">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="nf">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span>
+</code></pre></div></div>
+
 <h3 id="rotting-fruit">Rotting fruit</h3>
 
 <p>Problem: <a href="https://neetcode.io/problems/rotting-fruit">https://neetcode.io/problems/rotting-fruit</a></p>
 
-<p>Idea: Fresh fruits are getting rotten if there is a rotten neighbor in a minute. That’s why, we used BFS and counted how many level we go in our search in order to count the number of minutes passed for all the fresh fruits to get rotten.</p>
+<p>Idea: Fresh fruits are getting rotten if there is a rotten neighbor in a minute. That’s why, we used BFS and counted how many level we go in our search in order to count the number of minutes needed for all the fresh fruits to rot.</p>
 
 <p>Code:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -289,7 +405,7 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
                 
             <span class="n">maxTime</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">maxTime</span> <span class="k">if</span> <span class="n">fresh</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
-</code></pre></div></div>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[There are two main ways to traverse a graph: Add vertices to stack or queue, and pop from the stack/queue and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS. Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, we usually end up ending the parent vertex as a parameter to the method.]]></summary></entry><entry><title type="html">Building GitHub Pages using Docker</title><link href="http://0.0.0.0:4000/programming/building-github-pages-using-docker/" rel="alternate" type="text/html" title="Building GitHub Pages using Docker" /><published>2022-01-21T00:00:00+00:00</published><updated>2022-01-21T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/building-github-pages-using-docker</id><content type="html" xml:base="http://0.0.0.0:4000/programming/building-github-pages-using-docker/"><![CDATA[<p>This website is built using Jekyll with Minimal Mistakes theme and hosted on
+</code></pre></div></div>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[There are two main ways to traverse a graph: Add a vertex to stack/queue, and pop from it and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS. Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, recursive method usually take two inputs: child and parent, so that we can separate parent node while iterating over the neighbors.]]></summary></entry><entry><title type="html">Building GitHub Pages using Docker</title><link href="http://0.0.0.0:4000/programming/building-github-pages-using-docker/" rel="alternate" type="text/html" title="Building GitHub Pages using Docker" /><published>2022-01-21T00:00:00+00:00</published><updated>2022-01-21T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/building-github-pages-using-docker</id><content type="html" xml:base="http://0.0.0.0:4000/programming/building-github-pages-using-docker/"><![CDATA[<p>This website is built using Jekyll with Minimal Mistakes theme and hosted on
 GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll.
 Ruby is a programming language, RubyGems is a package manager for Ruby just like
 pip for Python and finally Jekyll is a gem that converts markdowns to html codes. 

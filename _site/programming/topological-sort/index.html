@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Topological Sort -</title>
-<meta name="description" content="Here is the most frequently used graph algorithms and data structures. This page will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
+<meta name="description" content="This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
 
 
   <meta name="author" content="Mustafa Avcu">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://0.0.0.0:4000/programming/topological-sort/">
 
 
-  <meta property="og:description" content="Here is the most frequently used graph algorithms and data structures. This page will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
+  <meta property="og:description" content="This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
 
 
 
@@ -272,7 +272,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Topological Sort">
-    <meta itemprop="description" content="Here is the most frequently used graph algorithms and data structures. This page willnot go into the details of other data structures that are used for example: stacks, queues,hash maps etc. and will keep the focus on the graph techniques.">
+    <meta itemprop="description" content="This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
     <meta itemprop="datePublished" content="2026-08-28T00:00:00+00:00">
     
 
@@ -309,9 +309,7 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>Here is the most frequently used graph algorithms and data structures. This page will
-not go into the details of other data structures that are used for example: stacks, queues,
-hash maps etc. and will keep the focus on the graph techniques.</p>
+        <p>This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.</p>
 
 <h2 id="topological-sort">Topological Sort</h2>
 
@@ -331,7 +329,7 @@ hash maps etc. and will keep the focus on the graph techniques.</p>
 
 <p>Then, do the following operations:</p>
 <ol>
-  <li>Add the verteces whose <code class="language-plaintext highlighter-rouge">inDegree</code> is zero to a queue</li>
+  <li>Add the vertices whose <code class="language-plaintext highlighter-rouge">inDegree</code> is zero to a queue</li>
   <li>Pop from the queue in a while loop
     <ul>
       <li>Update the <code class="language-plaintext highlighter-rouge">inDegree</code> for the neighbor vertices</li>
@@ -340,10 +338,13 @@ hash maps etc. and will keep the focus on the graph techniques.</p>
   </li>
 </ol>
 
-<p>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code>
-Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code></p>
+<p>Complexity Analysis:</p>
+<ul>
+  <li>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V + E)</code></li>
+  <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code></li>
+</ul>
 
-<p>Sample Problem: <a href="https://leetcode.com/problems/course-schedule">https://leetcode.com/problems/course-schedule</a></p>
+<p>Sample Problem: <a href="https://neetcode.io/problems/course-schedule">https://neetcode.io/problems/course-schedule</a></p>
 
 <p>Code:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -389,7 +390,7 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
 
 <p>Idea: This solution has two additions to the cycle detection logic above</p>
 <ol>
-  <li>We would like to find the least quiet person in every subtree formed from each vertex, so we create a 1-d list to prepare this result</li>
+  <li>We would like to find the least quiet person in every subtree formed from each vertex, so we create a 1-d list to store this result</li>
   <li>To avoid redundant calculations, we switch to recursion and we skip the calculations for a subtree if it is already calculated before. This is similar to top-down dynamic programming where we use recursion and memoization.</li>
 </ol>
 
@@ -424,7 +425,7 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
 </code></pre></div></div>
 <h4 id="min-height-tree">Min Height Tree</h4>
 
-<p>Problem: <a href="https://leetcode.com/problems/minimum-height-trees">https://leetcode.com/problems/minimum-height-trees</a></p>
+<p>Problem: <a href="https://neetcode.io/problems/minimum-height-trees">https://neetcode.io/problems/minimum-height-trees</a></p>
 
 <p>Idea: We would like to find the vertices which minimizes the height of the tree when they are selected as the root. This problem requires finding the longest path in the graph and then taking the median (middle vertex/vertices) in that path. A way to find these middle vertices is to get rid of leaf vertices step by step until we end up with one or two vertex.</p>
 
@@ -465,8 +466,9 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
             
 </code></pre></div></div>
 
-<p>Code: Following solution first finds the longest path and then returns the middle vertices. Note that since this graph is undirected, we need to keep track of the parent vertex in our recursive method.</p>
+<p>Straightforward solution is to find the longest path and then returns the middle vertices. Note that since this graph is undirected, we need to keep track of the parent vertex in our recursive method. Also, since we are starting from a random vertex, the first longest path we find may not actually be the longest path overall. So, we start another path search from the point we find in our first search.</p>
 
+<p>Code:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">findMinHeightTrees</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
@@ -496,9 +498,15 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
             <span class="k">return</span> <span class="p">[</span><span class="n">secondArr</span><span class="p">[</span><span class="n">lenArr</span><span class="o">//</span><span class="mi">2</span><span class="p">]]</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">secondArr</span><span class="p">[</span><span class="n">lenArr</span><span class="o">//</span><span class="mi">2</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">secondArr</span><span class="p">[</span><span class="n">lenArr</span><span class="o">//</span><span class="mi">2</span><span class="p">]]</span>
 </code></pre></div></div>
+
 <h3 id="references">References</h3>
 <ul>
-  <li>Problem list: <a href="https://leetcode.com/problem-list/topological-sort">https://leetcode.com/problem-list/topological-sort</a></li>
+  <li>Topological Sort problem list:
+    <ul>
+      <li><a href="https://neetcode.io/practice/problem-list/topological-sort">https://neetcode.io/practice/problem-list/topological-sort</a></li>
+      <li><a href="https://leetcode.com/problem-list/topological-sort">https://leetcode.com/problem-list/topological-sort</a></li>
+    </ul>
+  </li>
 </ul>
 
         
@@ -569,7 +577,8 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/programming/union-find/" class="pagination--pager" title="Union-Find Algorithm
+">Next</a>
     
   </nav>
 
@@ -583,6 +592,45 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/programming/union-find/" rel="permalink">Union-Find Algorithm
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the grap...</p>
+  </article>
+</div>
+
         
           
 
@@ -620,7 +668,7 @@ Space Complexity: <code class="language-plaintext highlighter-rouge">O(V)</code>
 
     <p class="archive__item-excerpt" itemprop="description">There are two main ways to traverse a graph:
 
-  Add vertices to stack or queue, and pop from the stack/queue and add the neighbors to the stack/queue. Stack ...</p>
+  Add a vertex to stack/queue, and pop from it and add the neighbors to the stack/queue. Stack will result in D...</p>
   </article>
 </div>
 
