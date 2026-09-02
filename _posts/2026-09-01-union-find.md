@@ -8,7 +8,7 @@ tags:
   - Algorithm
 ---
 
-**Union-Find**: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows:
+**Union-Find** algorithm also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows:
 1. find(n): finds the representative (root) of the set containing node n. If two elements return the same root, they are in the same set
 2. union(n1, n2): merges the set containing n1 with the set containing n2 into a single set
 

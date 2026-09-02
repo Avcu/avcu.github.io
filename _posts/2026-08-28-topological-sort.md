@@ -8,7 +8,7 @@ tags:
   - Algorithm
 ---
 
-**Topological Sort**: linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the ordering. It only exists for directed acyclic graph (DAG) and result may not be unique.
+**Topological Sort** is linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the ordering. It only exists for directed acyclic graph (DAG) and result may not be unique.
 
 ### Detecting Cycles in Directed Graph
 

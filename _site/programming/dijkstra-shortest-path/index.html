@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Dijkstra’s Algorithm and Shortest Path -</title>
-<meta name="description" content="Dijkstra: finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
+<meta name="description" content="Dijkstra’s algorithm finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
 
 
   <meta name="author" content="Mustafa Avcu">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://0.0.0.0:4000/programming/dijkstra-shortest-path/">
 
 
-  <meta property="og:description" content="Dijkstra: finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
+  <meta property="og:description" content="Dijkstra’s algorithm finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
 
 
 
@@ -272,7 +272,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Dijkstra’s Algorithm and Shortest Path">
-    <meta itemprop="description" content="Dijkstra: finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
+    <meta itemprop="description" content="Dijkstra’s algorithm finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
     <meta itemprop="datePublished" content="2026-09-02T00:00:00+00:00">
     
 
@@ -309,9 +309,9 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p><strong>Dijkstra</strong>: finds the shortest path from the source node to all other nodes when all edge weights are <em>non-negative</em> by using min-heap.</p>
+        <p><strong>Dijkstra’s</strong> algorithm finds the shortest path from the source node to all other nodes when all edge weights are <em>non-negative</em> by using min-heap.</p>
 
-<p>Key idea in this algorithm is to always keep expanding by using the min edge distance among unexplored nodes. Note that same node could be added into min-heap many times but it is picked from the min-heap, its shortest distance is final.</p>
+<p>Key idea in this algorithm is to always keep expanding by using the min edge distance among unexplored nodes. Note that same node could be added into min-heap many times but when it is picked from the min-heap, its shortest distance is final.</p>
 
 <p>Sample problem: <a href="https://neetcode.io/problems/network-delay-time">https://neetcode.io/problems/network-delay-time</a></p>
 
@@ -356,7 +356,7 @@
 
 <h2 id="bellman-ford-algorithm">Bellman-Ford Algorithm</h2>
 
-<p>Bellman-Ford algorithm updates the distances repeatedly with relaxations. Each relaxation tries to improve the shortest distance to a node using one more edge away from the source.</p>
+<p>Bellman-Ford algorithm updates the distances repeatedly with relaxations. Each relaxation tries to improve the shortest distance to a node by expanding the optimal shortest distances.</p>
 
 <p>Code:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
@@ -383,7 +383,7 @@
   <li>Use queue to propagate distance updates</li>
 </ul>
 
-<p>Code</p>
+<p>Code:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">networkDelayTime</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
         <span class="n">adj</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
@@ -555,7 +555,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Union-Find: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking conn...</p>
+    <p class="archive__item-excerpt" itemprop="description">Union-Find algorithm also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for trac...</p>
   </article>
 </div>
 
@@ -594,7 +594,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Topological Sort: linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the orderi...</p>
+    <p class="archive__item-excerpt" itemprop="description">Topological Sort is linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the orde...</p>
   </article>
 </div>
 

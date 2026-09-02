@@ -8,9 +8,9 @@ tags:
   - Algorithm
 ---
 
-**Dijkstra**: finds the shortest path from the source node to all other nodes when all edge weights are *non-negative* by using min-heap.
+**Dijkstra's** algorithm finds the shortest path from the source node to all other nodes when all edge weights are *non-negative* by using min-heap.
 
-Key idea in this algorithm is to always keep expanding by using the min edge distance among unexplored nodes. Note that same node could be added into min-heap many times but it is picked from the min-heap, its shortest distance is final.
+Key idea in this algorithm is to always keep expanding by using the min edge distance among unexplored nodes. Note that same node could be added into min-heap many times but when it is picked from the min-heap, its shortest distance is final.
 
 Sample problem: [https://neetcode.io/problems/network-delay-time](https://neetcode.io/problems/network-delay-time)
 
@@ -51,7 +51,7 @@ Complexity Analysis:
 
 ## Bellman-Ford Algorithm
 
-Bellman-Ford algorithm updates the distances repeatedly with relaxations. Each relaxation tries to improve the shortest distance to a node using one more edge away from the source.
+Bellman-Ford algorithm updates the distances repeatedly with relaxations. Each relaxation tries to improve the shortest distance to a node by expanding the optimal shortest distances.
 
 Code:
 ``` python
@@ -75,7 +75,7 @@ And here is the optimized version of Bellman-Ford algorithm, known as Shortest P
 * Only process nodes whose distance was actually improved
 * Use queue to propagate distance updates
 
-Code
+Code:
 ``` python
 class Solution:
     def networkDelayTime(self, times, n, k):
