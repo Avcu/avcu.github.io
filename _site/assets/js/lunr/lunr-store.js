@@ -18,14 +18,20 @@ var store = [{
         "teaser": null
       },{
         "title": "Topological Sort",
-        "excerpt":"This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques. Topological Sort Topological Sort: linear ordering of vertices in a directed graph such that for every directed edge from...","categories": ["Programming"],
+        "excerpt":"Topological Sort: linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the ordering. It only exists for directed acyclic graph (DAG) and result may not be unique. Detecting Cycles in Directed Graph Following algorithm...","categories": ["Programming"],
         "tags": ["Graph","Data Structure","Algorithm"],
         "url": "/programming/topological-sort/",
         "teaser": null
       },{
         "title": "Union-Find Algorithm and Minimum Spanning Tree",
-        "excerpt":"This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques. Union-Find Algorithm Union-Find: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets....","categories": ["Programming"],
+        "excerpt":"Union-Find: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows: find(n): finds the representative (root) of the set containing node n. If two elements return the same root, they...","categories": ["Programming"],
         "tags": ["Graph","Data Structure","Algorithm"],
         "url": "/programming/union-find/",
+        "teaser": null
+      },{
+        "title": "Dijkstra's Algorithm and Shortest Path",
+        "excerpt":"Dijkstra: finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap. Key idea in this algorithm is to always keep expanding by using the min edge distance among unexplored nodes. Note that same node could be added into min-heap...","categories": ["Programming"],
+        "tags": ["Graph","Data Structure","Algorithm"],
+        "url": "/programming/dijkstra-shortest-path/",
         "teaser": null
       }]

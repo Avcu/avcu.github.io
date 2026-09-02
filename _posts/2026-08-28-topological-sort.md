@@ -8,11 +8,7 @@ tags:
   - Algorithm
 ---
 
-This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.
-
-## Topological Sort
-
-> `Topological Sort`: linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the ordering. It only exists for directed acyclic graph (DAG) and it may not be unique.
+**Topological Sort**: linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the ordering. It only exists for directed acyclic graph (DAG) and result may not be unique.
 
 ### Detecting Cycles in Directed Graph
 

@@ -8,12 +8,11 @@ tags:
   - Algorithm
 ---
 
-This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.
+**Union-Find**: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows:
+1. find(n): finds the representative (root) of the set containing node n. If two elements return the same root, they are in the same set
+2. union(n1, n2): merges the set containing n1 with the set containing n2 into a single set
 
-## Union-Find Algorithm
-
-> `Union-Find`: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets.
-
+Note that this algorithm only works with undirected graphs.
 
 ``` python
 # initially, parent for each vertex is itself
@@ -90,6 +89,8 @@ class Solution:
 2. Pick the smallest edge from the sorted list
 3. Check for cycles, union-find fits perfectly here
 4. Add the edge to the MST if it does not form a cycle
+
+Note that this algorithm only works with undirected graphs and its time complexity is `O(E x log(E))`
 
 Sample Problem: [https://neetcode.io/problems/min-cost-to-connect-points](https://neetcode.io/problems/min-cost-to-connect-points)
 

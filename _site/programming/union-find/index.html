@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Union-Find Algorithm and Minimum Spanning Tree -</title>
-<meta name="description" content="This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
+<meta name="description" content="Union-Find: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows:    find(n): finds the representative (root) of the set containing node n. If two elements return the same root, they are in the same set   union(n1, n2): merges the set containing n1 with the set containing n2 into a single set">
 
 
   <meta name="author" content="Mustafa Avcu">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://0.0.0.0:4000/programming/union-find/">
 
 
-  <meta property="og:description" content="This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
+  <meta property="og:description" content="Union-Find: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows:    find(n): finds the representative (root) of the set containing node n. If two elements return the same root, they are in the same set   union(n1, n2): merges the set containing n1 with the set containing n2 into a single set">
 
 
 
@@ -272,7 +272,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Union-Find Algorithm and Minimum Spanning Tree">
-    <meta itemprop="description" content="This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.">
+    <meta itemprop="description" content="Union-Find: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows:  find(n): finds the representative (root) of the set containing node n. If two elements return the same root, they are in the same set  union(n1, n2): merges the set containing n1 with the set containing n2 into a single set">
     <meta itemprop="datePublished" content="2026-09-01T00:00:00+00:00">
     
 
@@ -309,13 +309,13 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.</p>
+        <p><strong>Union-Find</strong>: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows:</p>
+<ol>
+  <li>find(n): finds the representative (root) of the set containing node n. If two elements return the same root, they are in the same set</li>
+  <li>union(n1, n2): merges the set containing n1 with the set containing n2 into a single set</li>
+</ol>
 
-<h2 id="union-find-algorithm">Union-Find Algorithm</h2>
-
-<blockquote>
-  <p><code class="language-plaintext highlighter-rouge">Union-Find</code>: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets.</p>
-</blockquote>
+<p>Note that this algorithm only works with undirected graphs.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># initially, parent for each vertex is itself
 </span><span class="n">parent</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="nf">range</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span>
@@ -394,6 +394,8 @@
   <li>Check for cycles, union-find fits perfectly here</li>
   <li>Add the edge to the MST if it does not form a cycle</li>
 </ol>
+
+<p>Note that this algorithm only works with undirected graphs and its time complexity is <code class="language-plaintext highlighter-rouge">O(E x log(E))</code></p>
 
 <p>Sample Problem: <a href="https://neetcode.io/problems/min-cost-to-connect-points">https://neetcode.io/problems/min-cost-to-connect-points</a></p>
 
@@ -506,7 +508,8 @@
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/programming/dijkstra-shortest-path/" class="pagination--pager" title="Dijkstra’s Algorithm and Shortest Path
+">Next</a>
     
   </nav>
 
@@ -520,6 +523,46 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/programming/dijkstra-shortest-path/" rel="permalink">Dijkstra’s Algorithm and Shortest Path
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Dijkstra: finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -555,7 +598,7 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the grap...</p>
+    <p class="archive__item-excerpt" itemprop="description">Topological Sort: linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the orderi...</p>
   </article>
 </div>
 
@@ -638,46 +681,6 @@
     <p class="archive__item-excerpt" itemprop="description">This website is built using Jekyll with Minimal Mistakes theme and hosted on
 GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll.
 R...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/programming/writing-on-github/" rel="permalink">Writing on Github
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">It’s a template post presenting different writing styles/features that can be used in github repositories and pages.
-Most of the examples are from Github - B...</p>
   </article>
 </div>
 

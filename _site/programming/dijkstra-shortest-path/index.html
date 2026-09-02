@@ -1,0 +1,744 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Dijkstra’s Algorithm and Shortest Path -</title>
+<meta name="description" content="Dijkstra: finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
+
+
+  <meta name="author" content="Mustafa Avcu">
+  
+  <meta property="article:author" content="Mustafa Avcu">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="Dijkstra’s Algorithm and Shortest Path">
+<meta property="og:url" content="http://0.0.0.0:4000/programming/dijkstra-shortest-path/">
+
+
+  <meta property="og:description" content="Dijkstra: finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-09-02T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/programming/dijkstra-shortest-path/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Mustafa Avcu",
+      "url": "http://0.0.0.0:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">About Me</a>
+            </li><li class="masthead__menu-item">
+              <a href="/resume/">Resume</a>
+            </li><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/publications/">Publications</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tracks/sample.html">Misc</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://0.0.0.0:4000/">
+        <img src="/assets/images/profile_picture.jpg" alt="Mustafa Avcu" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://0.0.0.0:4000/" itemprop="url">Mustafa Avcu</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Software Engineer based in NYC. M.Sc. in Computer Science at USC.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">New York, NY</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:itsavcu@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://twitter.com/mtavcu" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/avcu" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Dijkstra’s Algorithm and Shortest Path">
+    <meta itemprop="description" content="Dijkstra: finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
+    <meta itemprop="datePublished" content="2026-09-02T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://0.0.0.0:4000/programming/dijkstra-shortest-path/" class="u-url" itemprop="url">Dijkstra’s Algorithm and Shortest Path
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p><strong>Dijkstra</strong>: finds the shortest path from the source node to all other nodes when all edge weights are <em>non-negative</em> by using min-heap.</p>
+
+<p>Key idea in this algorithm is to always keep expanding by using the min edge distance among unexplored nodes. Note that same node could be added into min-heap many times but it is picked from the min-heap, its shortest distance is final.</p>
+
+<p>Sample problem: <a href="https://neetcode.io/problems/network-delay-time">https://neetcode.io/problems/network-delay-time</a></p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">heapq</span> <span class="kn">import</span> <span class="n">heappush</span><span class="p">,</span> <span class="n">heappop</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">networkDelayTime</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">minDict</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">append</span><span class="p">([</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
+
+        <span class="c1"># (weight, node)
+</span>        <span class="n">minHeap</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">)]</span>
+
+        <span class="k">while</span> <span class="n">minHeap</span><span class="p">:</span>
+            <span class="n">curW</span><span class="p">,</span> <span class="n">curNode</span> <span class="o">=</span> <span class="nf">heappop</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">curNode</span> <span class="ow">in</span> <span class="n">minDict</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">minDict</span><span class="p">[</span><span class="n">curNode</span><span class="p">]</span> <span class="o">=</span> <span class="n">curW</span>
+
+            <span class="k">for</span> <span class="n">nei</span><span class="p">,</span> <span class="n">neiW</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">curNode</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">nei</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">minDict</span><span class="p">:</span>
+                    <span class="nf">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">curW</span><span class="o">+</span><span class="n">neiW</span><span class="p">,</span> <span class="n">nei</span><span class="p">))</span>
+
+        
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">minDict</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span> <span class="k">else</span> <span class="nf">max</span><span class="p">(</span><span class="n">minDict</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Complexity Analysis:</p>
+<ul>
+  <li>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(E x log(E))</code> for the above implementation.
+    <ul>
+      <li>With decrease key: <code class="language-plaintext highlighter-rouge">O(V x log(V) + E x log(V))</code> where <code class="language-plaintext highlighter-rouge">V x log(V)</code> to delete vertices from the heap and <code class="language-plaintext highlighter-rouge">E x log(V)</code> to update values in the heap.</li>
+    </ul>
+  </li>
+  <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(E+V)</code></li>
+</ul>
+
+<h2 id="bellman-ford-algorithm">Bellman-Ford Algorithm</h2>
+
+<p>Bellman-Ford algorithm updates the distances repeatedly with relaxations. Each relaxation tries to improve the shortest distance to a node using one more edge away from the source.</p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">networkDelayTime</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="p">[</span><span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)]</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="n">dist</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">dist</span><span class="p">[</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span>
+        <span class="n">max_dist</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">max_dist</span> <span class="k">if</span> <span class="n">max_dist</span> <span class="o">&lt;</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>Complexity Analysis:</p>
+<ul>
+  <li>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V x E)</code></li>
+  <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(E+V)</code></li>
+</ul>
+
+<p>And here is the optimized version of Bellman-Ford algorithm, known as Shortest Path Faster Algorithm.</p>
+<ul>
+  <li>Only process nodes whose distance was actually improved</li>
+  <li>Use queue to propagate distance updates</li>
+</ul>
+
+<p>Code</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">networkDelayTime</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="nf">append</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="nf">float</span><span class="p">(</span><span class="sh">"</span><span class="s">inf</span><span class="sh">"</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">([(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+        <span class="n">dist</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">time</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">nei</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">time</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">nei</span><span class="p">]:</span>
+                    <span class="n">dist</span><span class="p">[</span><span class="n">nei</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span> <span class="o">+</span> <span class="n">w</span>
+                    <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">nei</span><span class="p">,</span> <span class="n">time</span> <span class="o">+</span> <span class="n">w</span><span class="p">))</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">dist</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">res</span> <span class="k">if</span> <span class="n">res</span> <span class="o">&lt;</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>Complexity Analysis:</p>
+<ul>
+  <li>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V x E)</code> in worst case and <code class="language-plaintext highlighter-rouge">O(V+E)</code> in average</li>
+  <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(E+V)</code></li>
+</ul>
+
+<h3 id="cheapest-flights-within-k-stops">Cheapest Flights Within K Stops</h3>
+
+<p>Problem: <a href="https://neetcode.io/problems/cheapest-flight-path">https://neetcode.io/problems/cheapest-flight-path</a></p>
+
+<p>For this problem, Bellman-Ford algorithm fits very well because of the limit on the path length.</p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">findCheapestPrice</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">flights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">src</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dst</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="p">[</span><span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)]</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="n">cost</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">newCost</span> <span class="o">=</span> <span class="n">cost</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">flights</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cost</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">!=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">):</span>
+                    <span class="n">newCost</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">newCost</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">cost</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">price</span><span class="p">)</span>
+
+            <span class="n">cost</span> <span class="o">=</span> <span class="n">newCost</span>
+
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">cost</span><span class="p">[</span><span class="n">dst</span><span class="p">]</span> <span class="o">==</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span> <span class="k">else</span> <span class="n">cost</span><span class="p">[</span><span class="n">dst</span><span class="p">]</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#algorithm" class="page__taxonomy-item p-category" rel="tag">Algorithm</a><span class="sep">, </span>
+    
+      <a href="/tags/#data-structure" class="page__taxonomy-item p-category" rel="tag">Data Structure</a><span class="sep">, </span>
+    
+      <a href="/tags/#graph" class="page__taxonomy-item p-category" rel="tag">Graph</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#programming" class="page__taxonomy-item p-category" rel="tag">Programming</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-09-02T00:00:00+00:00">September 2, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Dijkstra%27s+Algorithm+and+Shortest+Path%20http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Fdijkstra-shortest-path%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Fdijkstra-shortest-path%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2Fprogramming%2Fdijkstra-shortest-path%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/programming/union-find/" class="pagination--pager" title="Union-Find Algorithm and Minimum Spanning Tree
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/programming/union-find/" rel="permalink">Union-Find Algorithm and Minimum Spanning Tree
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Union-Find: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking conn...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/programming/topological-sort/" rel="permalink">Topological Sort
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Topological Sort: linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the orderi...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/programming/traversing-graphs/" rel="permalink">Traversing Graphs
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">There are two main ways to traverse a graph:
+
+  Add a vertex to stack/queue, and pop from it and add the neighbors to the stack/queue. Stack will result in D...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/programming/building-github-pages-using-docker/" rel="permalink">Building GitHub Pages using Docker
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">This website is built using Jekyll with Minimal Mistakes theme and hosted on
+GitHub Pages. To run the website locally, one needs Ruby, RubyGems and Jekyll.
+R...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Mustafa Avcu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

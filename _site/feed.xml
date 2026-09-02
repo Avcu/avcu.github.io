@@ -1,10 +1,137 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-09-01T18:27:08+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Mustafa Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Avcu</name></author><entry><title type="html">Union-Find Algorithm and Minimum Spanning Tree</title><link href="http://0.0.0.0:4000/programming/union-find/" rel="alternate" type="text/html" title="Union-Find Algorithm and Minimum Spanning Tree" /><published>2026-09-01T00:00:00+00:00</published><updated>2026-09-01T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/union-find</id><content type="html" xml:base="http://0.0.0.0:4000/programming/union-find/"><![CDATA[<p>This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-09-02T03:07:29+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Mustafa Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Avcu</name></author><entry><title type="html">Dijkstra’s Algorithm and Shortest Path</title><link href="http://0.0.0.0:4000/programming/dijkstra-shortest-path/" rel="alternate" type="text/html" title="Dijkstra’s Algorithm and Shortest Path" /><published>2026-09-02T00:00:00+00:00</published><updated>2026-09-02T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/dijkstra-shortest-path</id><content type="html" xml:base="http://0.0.0.0:4000/programming/dijkstra-shortest-path/"><![CDATA[<p><strong>Dijkstra</strong>: finds the shortest path from the source node to all other nodes when all edge weights are <em>non-negative</em> by using min-heap.</p>
 
-<h2 id="union-find-algorithm">Union-Find Algorithm</h2>
+<p>Key idea in this algorithm is to always keep expanding by using the min edge distance among unexplored nodes. Note that same node could be added into min-heap many times but it is picked from the min-heap, its shortest distance is final.</p>
 
-<blockquote>
-  <p><code class="language-plaintext highlighter-rouge">Union-Find</code>: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets.</p>
-</blockquote>
+<p>Sample problem: <a href="https://neetcode.io/problems/network-delay-time">https://neetcode.io/problems/network-delay-time</a></p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">heapq</span> <span class="kn">import</span> <span class="n">heappush</span><span class="p">,</span> <span class="n">heappop</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">networkDelayTime</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">minDict</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">append</span><span class="p">([</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
+
+        <span class="c1"># (weight, node)
+</span>        <span class="n">minHeap</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">)]</span>
+
+        <span class="k">while</span> <span class="n">minHeap</span><span class="p">:</span>
+            <span class="n">curW</span><span class="p">,</span> <span class="n">curNode</span> <span class="o">=</span> <span class="nf">heappop</span><span class="p">(</span><span class="n">minHeap</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">curNode</span> <span class="ow">in</span> <span class="n">minDict</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">minDict</span><span class="p">[</span><span class="n">curNode</span><span class="p">]</span> <span class="o">=</span> <span class="n">curW</span>
+
+            <span class="k">for</span> <span class="n">nei</span><span class="p">,</span> <span class="n">neiW</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">curNode</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">nei</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">minDict</span><span class="p">:</span>
+                    <span class="nf">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">curW</span><span class="o">+</span><span class="n">neiW</span><span class="p">,</span> <span class="n">nei</span><span class="p">))</span>
+
+        
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">minDict</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span> <span class="k">else</span> <span class="nf">max</span><span class="p">(</span><span class="n">minDict</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Complexity Analysis:</p>
+<ul>
+  <li>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(E x log(E))</code> for the above implementation.
+    <ul>
+      <li>With decrease key: <code class="language-plaintext highlighter-rouge">O(V x log(V) + E x log(V))</code> where <code class="language-plaintext highlighter-rouge">V x log(V)</code> to delete vertices from the heap and <code class="language-plaintext highlighter-rouge">E x log(V)</code> to update values in the heap.</li>
+    </ul>
+  </li>
+  <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(E+V)</code></li>
+</ul>
+
+<h2 id="bellman-ford-algorithm">Bellman-Ford Algorithm</h2>
+
+<p>Bellman-Ford algorithm updates the distances repeatedly with relaxations. Each relaxation tries to improve the shortest distance to a node using one more edge away from the source.</p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">networkDelayTime</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="p">[</span><span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)]</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="n">dist</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">dist</span><span class="p">[</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span>
+        <span class="n">max_dist</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">max_dist</span> <span class="k">if</span> <span class="n">max_dist</span> <span class="o">&lt;</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>Complexity Analysis:</p>
+<ul>
+  <li>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V x E)</code></li>
+  <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(E+V)</code></li>
+</ul>
+
+<p>And here is the optimized version of Bellman-Ford algorithm, known as Shortest Path Faster Algorithm.</p>
+<ul>
+  <li>Only process nodes whose distance was actually improved</li>
+  <li>Use queue to propagate distance updates</li>
+</ul>
+
+<p>Code</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">networkDelayTime</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span>
+            <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="nf">append</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="nf">float</span><span class="p">(</span><span class="sh">"</span><span class="s">inf</span><span class="sh">"</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">([(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+        <span class="n">dist</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">time</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">nei</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">time</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">nei</span><span class="p">]:</span>
+                    <span class="n">dist</span><span class="p">[</span><span class="n">nei</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span> <span class="o">+</span> <span class="n">w</span>
+                    <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">nei</span><span class="p">,</span> <span class="n">time</span> <span class="o">+</span> <span class="n">w</span><span class="p">))</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">dist</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">res</span> <span class="k">if</span> <span class="n">res</span> <span class="o">&lt;</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>Complexity Analysis:</p>
+<ul>
+  <li>Runtime Complexity: <code class="language-plaintext highlighter-rouge">O(V x E)</code> in worst case and <code class="language-plaintext highlighter-rouge">O(V+E)</code> in average</li>
+  <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(E+V)</code></li>
+</ul>
+
+<h3 id="cheapest-flights-within-k-stops">Cheapest Flights Within K Stops</h3>
+
+<p>Problem: <a href="https://neetcode.io/problems/cheapest-flight-path">https://neetcode.io/problems/cheapest-flight-path</a></p>
+
+<p>For this problem, Bellman-Ford algorithm fits very well because of the limit on the path length.</p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">findCheapestPrice</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">flights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">src</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dst</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="p">[</span><span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)]</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="n">cost</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">newCost</span> <span class="o">=</span> <span class="n">cost</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">flights</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cost</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">!=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">):</span>
+                    <span class="n">newCost</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">newCost</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">cost</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">price</span><span class="p">)</span>
+
+            <span class="n">cost</span> <span class="o">=</span> <span class="n">newCost</span>
+
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">cost</span><span class="p">[</span><span class="n">dst</span><span class="p">]</span> <span class="o">==</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span> <span class="k">else</span> <span class="n">cost</span><span class="p">[</span><span class="n">dst</span><span class="p">]</span>
+</code></pre></div></div>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[Dijkstra: finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.]]></summary></entry><entry><title type="html">Union-Find Algorithm and Minimum Spanning Tree</title><link href="http://0.0.0.0:4000/programming/union-find/" rel="alternate" type="text/html" title="Union-Find Algorithm and Minimum Spanning Tree" /><published>2026-09-01T00:00:00+00:00</published><updated>2026-09-01T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/union-find</id><content type="html" xml:base="http://0.0.0.0:4000/programming/union-find/"><![CDATA[<p><strong>Union-Find</strong>: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows:</p>
+<ol>
+  <li>find(n): finds the representative (root) of the set containing node n. If two elements return the same root, they are in the same set</li>
+  <li>union(n1, n2): merges the set containing n1 with the set containing n2 into a single set</li>
+</ol>
+
+<p>Note that this algorithm only works with undirected graphs.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># initially, parent for each vertex is itself
 </span><span class="n">parent</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="nf">range</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span>
@@ -84,6 +211,8 @@
   <li>Add the edge to the MST if it does not form a cycle</li>
 </ol>
 
+<p>Note that this algorithm only works with undirected graphs and its time complexity is <code class="language-plaintext highlighter-rouge">O(E x log(E))</code></p>
+
 <p>Sample Problem: <a href="https://neetcode.io/problems/min-cost-to-connect-points">https://neetcode.io/problems/min-cost-to-connect-points</a></p>
 
 <p>Code:</p>
@@ -125,13 +254,7 @@
             <span class="k">if</span> <span class="nf">union</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
                 <span class="n">res</span> <span class="o">+=</span> <span class="n">dist</span>
         <span class="k">return</span> <span class="n">res</span>
-</code></pre></div></div>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.]]></summary></entry><entry><title type="html">Topological Sort</title><link href="http://0.0.0.0:4000/programming/topological-sort/" rel="alternate" type="text/html" title="Topological Sort" /><published>2026-08-28T00:00:00+00:00</published><updated>2026-08-28T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/topological-sort</id><content type="html" xml:base="http://0.0.0.0:4000/programming/topological-sort/"><![CDATA[<p>This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.</p>
-
-<h2 id="topological-sort">Topological Sort</h2>
-
-<blockquote>
-  <p><code class="language-plaintext highlighter-rouge">Topological Sort</code>: linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the ordering. It only exists for directed acyclic graph (DAG) and it may not be unique.</p>
-</blockquote>
+</code></pre></div></div>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[Union-Find: also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows: find(n): finds the representative (root) of the set containing node n. If two elements return the same root, they are in the same set union(n1, n2): merges the set containing n1 with the set containing n2 into a single set]]></summary></entry><entry><title type="html">Topological Sort</title><link href="http://0.0.0.0:4000/programming/topological-sort/" rel="alternate" type="text/html" title="Topological Sort" /><published>2026-08-28T00:00:00+00:00</published><updated>2026-08-28T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/topological-sort</id><content type="html" xml:base="http://0.0.0.0:4000/programming/topological-sort/"><![CDATA[<p><strong>Topological Sort</strong>: linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the ordering. It only exists for directed acyclic graph (DAG) and result may not be unique.</p>
 
 <h3 id="detecting-cycles-in-directed-graph">Detecting Cycles in Directed Graph</h3>
 
@@ -323,7 +446,7 @@
       <li><a href="https://leetcode.com/problem-list/topological-sort">https://leetcode.com/problem-list/topological-sort</a></li>
     </ul>
   </li>
-</ul>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[This post will not go into the details of other data structures that are used for example: stacks, queues, hash maps etc. and will keep the focus on the graph techniques.]]></summary></entry><entry><title type="html">Traversing Graphs</title><link href="http://0.0.0.0:4000/programming/traversing-graphs/" rel="alternate" type="text/html" title="Traversing Graphs" /><published>2026-08-27T00:00:00+00:00</published><updated>2026-08-27T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/traversing-graphs</id><content type="html" xml:base="http://0.0.0.0:4000/programming/traversing-graphs/"><![CDATA[<p>There are two main ways to traverse a graph:</p>
+</ul>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[Topological Sort: linear ordering of vertices in a directed graph such that for every directed edge from vertex u to vertex v, u comes before v in the ordering. It only exists for directed acyclic graph (DAG) and result may not be unique.]]></summary></entry><entry><title type="html">Traversing Graphs</title><link href="http://0.0.0.0:4000/programming/traversing-graphs/" rel="alternate" type="text/html" title="Traversing Graphs" /><published>2026-08-27T00:00:00+00:00</published><updated>2026-08-27T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/traversing-graphs</id><content type="html" xml:base="http://0.0.0.0:4000/programming/traversing-graphs/"><![CDATA[<p>There are two main ways to traverse a graph:</p>
 <ol>
   <li>Add a vertex to stack/queue, and pop from it and add the neighbors to the stack/queue. Stack will result in DFS while queue will result in BFS.</li>
   <li>Write a recursive method that takes vertex as an input and call the same method for the neighbors. In undirected graphs, recursive method usually take two inputs: child and parent, so that we can separate parent node while iterating over the neighbors.</li>
