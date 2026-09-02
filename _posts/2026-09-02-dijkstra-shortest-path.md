@@ -8,9 +8,9 @@ tags:
   - Algorithm
 ---
 
-**Dijkstra's** algorithm finds the shortest path from the source node to all other nodes when all edge weights are *non-negative* by using min-heap.
+**Dijkstra's** algorithm finds the shortest path from the source node to all other nodes where all edge weights are *non-negative* by using min-heap.
 
-Key idea in this algorithm is to always keep expanding by using the min edge distance among unexplored nodes. Note that same node could be added into min-heap many times but when it is picked from the min-heap, its shortest distance is final.
+Key idea in this algorithm is to always keep expanding by using the min edge from the set of explored vertices to unexplored vertices. Note that same node could be added into min-heap many times (depending on the implementation) but when it is picked from the min-heap, its shortest distance is final.
 
 Sample problem: [https://neetcode.io/problems/network-delay-time](https://neetcode.io/problems/network-delay-time)
 
@@ -40,7 +40,6 @@ class Solution:
                 if nei not in minDict:
                     heappush(minHeap, (curW+neiW, nei))
 
-        
         return -1 if len(minDict) != n else max(minDict.values())
 ```
 
@@ -71,7 +70,7 @@ Complexity Analysis:
 * Runtime Complexity: `O(V x E)`
 * Space Complexity: `O(E+V)`
 
-And here is the optimized version of Bellman-Ford algorithm, known as Shortest Path Faster Algorithm.
+And here is the optimized version of Bellman-Ford algorithm, also known as Shortest Path Faster Algorithm.
 * Only process nodes whose distance was actually improved
 * Use queue to propagate distance updates
 

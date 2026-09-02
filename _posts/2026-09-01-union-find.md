@@ -49,7 +49,7 @@ Complexity Analysis:
 
 ### Redundant Connection
 
-Sample Problem: [https://neetcode.io/problems/redundant-connection](https://neetcode.io/problems/redundant-connection)
+Problem: [https://neetcode.io/problems/redundant-connection](https://neetcode.io/problems/redundant-connection)
 
 Code:
 ``` python

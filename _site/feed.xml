@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-09-02T03:15:46+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Mustafa Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Avcu</name></author><entry><title type="html">Dijkstra’s Algorithm and Shortest Path</title><link href="http://0.0.0.0:4000/programming/dijkstra-shortest-path/" rel="alternate" type="text/html" title="Dijkstra’s Algorithm and Shortest Path" /><published>2026-09-02T00:00:00+00:00</published><updated>2026-09-02T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/dijkstra-shortest-path</id><content type="html" xml:base="http://0.0.0.0:4000/programming/dijkstra-shortest-path/"><![CDATA[<p><strong>Dijkstra’s</strong> algorithm finds the shortest path from the source node to all other nodes when all edge weights are <em>non-negative</em> by using min-heap.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-09-02T15:44:51+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Mustafa Avcu</title><subtitle>Personal Website</subtitle><author><name>Mustafa Avcu</name></author><entry><title type="html">Dijkstra’s Algorithm and Shortest Path</title><link href="http://0.0.0.0:4000/programming/dijkstra-shortest-path/" rel="alternate" type="text/html" title="Dijkstra’s Algorithm and Shortest Path" /><published>2026-09-02T00:00:00+00:00</published><updated>2026-09-02T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/dijkstra-shortest-path</id><content type="html" xml:base="http://0.0.0.0:4000/programming/dijkstra-shortest-path/"><![CDATA[<p><strong>Dijkstra’s</strong> algorithm finds the shortest path from the source node to all other nodes where all edge weights are <em>non-negative</em> by using min-heap.</p>
 
-<p>Key idea in this algorithm is to always keep expanding by using the min edge distance among unexplored nodes. Note that same node could be added into min-heap many times but when it is picked from the min-heap, its shortest distance is final.</p>
+<p>Key idea in this algorithm is to always keep expanding by using the min edge from the set of explored vertices to unexplored vertices. Note that same node could be added into min-heap many times (depending on the implementation) but when it is picked from the min-heap, its shortest distance is final.</p>
 
 <p>Sample problem: <a href="https://neetcode.io/problems/network-delay-time">https://neetcode.io/problems/network-delay-time</a></p>
 
@@ -29,7 +29,6 @@
                 <span class="k">if</span> <span class="n">nei</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">minDict</span><span class="p">:</span>
                     <span class="nf">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">curW</span><span class="o">+</span><span class="n">neiW</span><span class="p">,</span> <span class="n">nei</span><span class="p">))</span>
 
-        
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">minDict</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span> <span class="k">else</span> <span class="nf">max</span><span class="p">(</span><span class="n">minDict</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
 </code></pre></div></div>
 
@@ -66,7 +65,7 @@
   <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(E+V)</code></li>
 </ul>
 
-<p>And here is the optimized version of Bellman-Ford algorithm, known as Shortest Path Faster Algorithm.</p>
+<p>And here is the optimized version of Bellman-Ford algorithm, also known as Shortest Path Faster Algorithm.</p>
 <ul>
   <li>Only process nodes whose distance was actually improved</li>
   <li>Use queue to propagate distance updates</li>
@@ -125,7 +124,7 @@
             <span class="n">cost</span> <span class="o">=</span> <span class="n">newCost</span>
 
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">cost</span><span class="p">[</span><span class="n">dst</span><span class="p">]</span> <span class="o">==</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span> <span class="k">else</span> <span class="n">cost</span><span class="p">[</span><span class="n">dst</span><span class="p">]</span>
-</code></pre></div></div>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[Dijkstra’s algorithm finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.]]></summary></entry><entry><title type="html">Union-Find Algorithm and Minimum Spanning Tree</title><link href="http://0.0.0.0:4000/programming/union-find/" rel="alternate" type="text/html" title="Union-Find Algorithm and Minimum Spanning Tree" /><published>2026-09-01T00:00:00+00:00</published><updated>2026-09-01T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/union-find</id><content type="html" xml:base="http://0.0.0.0:4000/programming/union-find/"><![CDATA[<p><strong>Union-Find</strong> algorithm also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows:</p>
+</code></pre></div></div>]]></content><author><name>Mustafa Avcu</name></author><category term="Programming" /><category term="Graph" /><category term="Data Structure" /><category term="Algorithm" /><summary type="html"><![CDATA[Dijkstra’s algorithm finds the shortest path from the source node to all other nodes where all edge weights are non-negative by using min-heap.]]></summary></entry><entry><title type="html">Union-Find Algorithm and Minimum Spanning Tree</title><link href="http://0.0.0.0:4000/programming/union-find/" rel="alternate" type="text/html" title="Union-Find Algorithm and Minimum Spanning Tree" /><published>2026-09-01T00:00:00+00:00</published><updated>2026-09-01T00:00:00+00:00</updated><id>http://0.0.0.0:4000/programming/union-find</id><content type="html" xml:base="http://0.0.0.0:4000/programming/union-find/"><![CDATA[<p><strong>Union-Find</strong> algorithm also known as Disjoint Set Union (DSU) manages a collection of elements split into non-overlapping sets. It is highly efficient for tracking connected elements. It has two operations as follows:</p>
 <ol>
   <li>find(n): finds the representative (root) of the set containing node n. If two elements return the same root, they are in the same set</li>
   <li>union(n1, n2): merges the set containing n1 with the set containing n2 into a single set</li>
@@ -169,7 +168,7 @@
 
 <h3 id="redundant-connection">Redundant Connection</h3>
 
-<p>Sample Problem: <a href="https://neetcode.io/problems/redundant-connection">https://neetcode.io/problems/redundant-connection</a></p>
+<p>Problem: <a href="https://neetcode.io/problems/redundant-connection">https://neetcode.io/problems/redundant-connection</a></p>
 
 <p>Code:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>

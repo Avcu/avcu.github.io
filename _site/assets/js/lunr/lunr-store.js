@@ -30,7 +30,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Dijkstra's Algorithm and Shortest Path",
-        "excerpt":"Dijkstra’s algorithm finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap. Key idea in this algorithm is to always keep expanding by using the min edge distance among unexplored nodes. Note that same node could be added into...","categories": ["Programming"],
+        "excerpt":"Dijkstra’s algorithm finds the shortest path from the source node to all other nodes where all edge weights are non-negative by using min-heap. Key idea in this algorithm is to always keep expanding by using the min edge from the set of explored vertices to unexplored vertices. Note that same...","categories": ["Programming"],
         "tags": ["Graph","Data Structure","Algorithm"],
         "url": "/programming/dijkstra-shortest-path/",
         "teaser": null

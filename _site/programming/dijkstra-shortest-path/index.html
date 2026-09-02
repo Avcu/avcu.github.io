@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Dijkstra’s Algorithm and Shortest Path -</title>
-<meta name="description" content="Dijkstra’s algorithm finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
+<meta name="description" content="Dijkstra’s algorithm finds the shortest path from the source node to all other nodes where all edge weights are non-negative by using min-heap.">
 
 
   <meta name="author" content="Mustafa Avcu">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://0.0.0.0:4000/programming/dijkstra-shortest-path/">
 
 
-  <meta property="og:description" content="Dijkstra’s algorithm finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
+  <meta property="og:description" content="Dijkstra’s algorithm finds the shortest path from the source node to all other nodes where all edge weights are non-negative by using min-heap.">
 
 
 
@@ -272,7 +272,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Dijkstra’s Algorithm and Shortest Path">
-    <meta itemprop="description" content="Dijkstra’s algorithm finds the shortest path from the source node to all other nodes when all edge weights are non-negative by using min-heap.">
+    <meta itemprop="description" content="Dijkstra’s algorithm finds the shortest path from the source node to all other nodes where all edge weights are non-negative by using min-heap.">
     <meta itemprop="datePublished" content="2026-09-02T00:00:00+00:00">
     
 
@@ -309,9 +309,9 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p><strong>Dijkstra’s</strong> algorithm finds the shortest path from the source node to all other nodes when all edge weights are <em>non-negative</em> by using min-heap.</p>
+        <p><strong>Dijkstra’s</strong> algorithm finds the shortest path from the source node to all other nodes where all edge weights are <em>non-negative</em> by using min-heap.</p>
 
-<p>Key idea in this algorithm is to always keep expanding by using the min edge distance among unexplored nodes. Note that same node could be added into min-heap many times but when it is picked from the min-heap, its shortest distance is final.</p>
+<p>Key idea in this algorithm is to always keep expanding by using the min edge from the set of explored vertices to unexplored vertices. Note that same node could be added into min-heap many times (depending on the implementation) but when it is picked from the min-heap, its shortest distance is final.</p>
 
 <p>Sample problem: <a href="https://neetcode.io/problems/network-delay-time">https://neetcode.io/problems/network-delay-time</a></p>
 
@@ -340,7 +340,6 @@
                 <span class="k">if</span> <span class="n">nei</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">minDict</span><span class="p">:</span>
                     <span class="nf">heappush</span><span class="p">(</span><span class="n">minHeap</span><span class="p">,</span> <span class="p">(</span><span class="n">curW</span><span class="o">+</span><span class="n">neiW</span><span class="p">,</span> <span class="n">nei</span><span class="p">))</span>
 
-        
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">minDict</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span> <span class="k">else</span> <span class="nf">max</span><span class="p">(</span><span class="n">minDict</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
 </code></pre></div></div>
 
@@ -377,7 +376,7 @@
   <li>Space Complexity: <code class="language-plaintext highlighter-rouge">O(E+V)</code></li>
 </ul>
 
-<p>And here is the optimized version of Bellman-Ford algorithm, known as Shortest Path Faster Algorithm.</p>
+<p>And here is the optimized version of Bellman-Ford algorithm, also known as Shortest Path Faster Algorithm.</p>
 <ul>
   <li>Only process nodes whose distance was actually improved</li>
   <li>Use queue to propagate distance updates</li>
